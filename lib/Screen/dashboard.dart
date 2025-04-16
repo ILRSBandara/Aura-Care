@@ -18,7 +18,7 @@ class DashboardScreen extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const BmiScreen()),
+              MaterialPageRoute(builder: (context) => const BMIScreen()),
             );
           },
           child: const Text('Open BMI Calculator'),
