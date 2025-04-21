@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 import 'package:flutter/material.dart';
-import 'package:aura_care/Screen/dashboard.dart';
+import 'package:aura_care/Screen/login.dart'; // Import LogIn screen
 
 class SignUp
     extends
@@ -26,6 +26,8 @@ class _SignUpState
       TextEditingController();
   final passwordController =
       TextEditingController();
+  final rePasswordController =
+      TextEditingController(); // Re-enter password controller
 
   // Initialize FirebaseAuth
   final FirebaseAuth
@@ -37,6 +39,15 @@ class _SignUpState
     void
   >
   _signUp() async {
+    // Check if passwords match
+    if (passwordController.text.trim() !=
+        rePasswordController.text.trim()) {
+      _showErrorDialog(
+        "Passwords do not match!",
+      );
+      return;
+    }
+
     try {
       // Create a new user with email and password
       UserCredential
@@ -55,46 +66,89 @@ class _SignUpState
               (
                 context,
               ) =>
-                  const DashboardScreen(),
+                  const LogIn(),
         ),
       );
     } catch (
       e
     ) {
       // Handle errors (e.g., weak password, invalid email)
-      showDialog(
-        context:
-            context,
-        builder:
-            (
-              context,
-            ) => AlertDialog(
-              title: const Text(
-                'Error',
-              ),
-              content: Text(
-                e.toString(),
-              ),
-              actions: <
-                Widget
-              >[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).pop();
-                  },
-                  child: const Text(
-                    'OK',
-                  ),
-                ),
-              ],
-            ),
+      _showErrorDialog(
+        e.toString(),
       );
     }
   }
 
-  @override
+  // Method to show error dialog
+  void
+  _showErrorDialog(
+    String
+    message,
+  ) {
+    showDialog(
+      context:
+          context,
+      builder:
+          (
+            context,
+          ) => AlertDialog(
+            title: const Text(
+              'Error',
+            ),
+            content: Text(
+              message,
+            ),
+            actions: <
+              Widget
+            >[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).pop();
+                },
+                child: const Text(
+                  'OK',
+                ),
+              ),
+            ],
+          ),
+    );
+  }
+
+  // @override
+  // Widget
+  // build(
+  //   BuildContext
+  //   context,
+  // ) {
+  //   return Scaffold(
+  //     backgroundColor:
+  //         Colors.white,
+  //     body: SingleChildScrollView(
+  //       child: Padding(
+  //         padding: const EdgeInsets.only(
+  //           left:
+  //               25,
+  //           right:
+  //               25,
+  //           top:
+  //               100,
+  //         ),
+  //         child: Column(
+  //           children: [
+  //             _header(),
+  //             _log(),
+  //             _inputFields(),
+  //             _signUpButton(),
+  //             _loginRedirect(),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget
   build(
     BuildContext
@@ -103,23 +157,44 @@ class _SignUpState
     return Scaffold(
       backgroundColor:
           Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(
-          25,
-        ),
-        child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.center,
-          children: [
-            _header(),
-            _inputFields(),
-            _signUpButton(),
-          ],
-        ),
+      resizeToAvoidBottomInset:
+          false,
+      body: Column(
+        children: [
+          Expanded(
+            flex:
+                1,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left:
+                      25,
+                  right:
+                      25,
+                  top:
+                      100,
+                ),
+                child: Column(
+                  children: [
+                    _header(),
+                    _log(),
+                    _inputFields(),
+                    _signUpButton(),
+                    _loginRedirect(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          _bot(
+            context,
+          ),
+        ],
       ),
     );
   }
 
+  // Header with logo and name
   _header() {
     return const Column(
       children: [
@@ -127,13 +202,34 @@ class _SignUpState
           height:
               5,
         ),
-        Text(
-          "Create Account",
-          style: TextStyle(
-            fontSize:
-                32,
-            fontWeight:
-                FontWeight.bold,
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text:
+                    "Create",
+                style: TextStyle(
+                  fontSize:
+                      34,
+                  fontWeight:
+                      FontWeight.bold,
+                  color:
+                      Colors.green,
+                ),
+              ),
+              TextSpan(
+                text:
+                    " Account",
+                style: TextStyle(
+                  fontSize:
+                      34,
+                  fontWeight:
+                      FontWeight.bold,
+                  color:
+                      Colors.black,
+                ),
+              ),
+            ],
           ),
         ),
         SizedBox(
@@ -144,6 +240,27 @@ class _SignUpState
     );
   }
 
+  _log() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom:
+                30,
+          ),
+          child: Image.asset(
+            'assets/Images/auraCareMainLogo.png',
+            height:
+                120,
+            fit:
+                BoxFit.cover,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Input fields for email, password, and re-enter password
   _inputFields() {
     return Column(
       children: [
@@ -182,7 +299,39 @@ class _SignUpState
               passwordController,
           decoration: InputDecoration(
             hintText:
-                "Password",
+                "Your Password",
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(
+                15,
+              ),
+              borderSide:
+                  BorderSide.none,
+            ),
+            fillColor: const Color.fromARGB(
+              100,
+              194,
+              255,
+              199,
+            ),
+            filled:
+                true,
+            prefixIcon: const Icon(
+              Icons.lock,
+            ),
+          ),
+          obscureText:
+              true,
+        ),
+        const SizedBox(
+          height:
+              25,
+        ),
+        TextField(
+          controller:
+              rePasswordController,
+          decoration: InputDecoration(
+            hintText:
+                "Re-enter Password",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
                 15,
@@ -213,6 +362,7 @@ class _SignUpState
     );
   }
 
+  // Sign up button
   _signUpButton() {
     return GestureDetector(
       onTap:
@@ -245,6 +395,114 @@ class _SignUpState
           ),
         ),
       ),
+    );
+  }
+
+  // Redirect to LogIn screen if already have an account
+  _loginRedirect() {
+    return Column(
+      children: [
+        const SizedBox(
+          height:
+              16,
+        ),
+        Row(
+          mainAxisAlignment:
+              MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Already have an account?",
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (
+                          context,
+                        ) =>
+                            const LogIn(),
+                  ), // Navigate to LogIn screen
+                );
+              },
+              child: const Text(
+                "Log In",
+                style: TextStyle(
+                  fontSize:
+                      15,
+                  color:
+                      Colors.green,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  _bot(
+    context,
+  ) {
+    return const Column(
+      children: [
+        Align(
+          alignment:
+              Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom:
+                  30,
+            ),
+            child: Column(
+              mainAxisSize:
+                  MainAxisSize.min,
+              children: [
+                Text(
+                  'From',
+                  style: TextStyle(
+                    fontSize:
+                        14,
+                    fontWeight:
+                        FontWeight.bold,
+                    color:
+                        Colors.grey,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Aura',
+                      style: TextStyle(
+                        fontSize:
+                            18,
+                        fontWeight:
+                            FontWeight.bold,
+                        color:
+                            Colors.green,
+                      ),
+                    ),
+                    Text(
+                      'Care',
+                      style: TextStyle(
+                        fontSize:
+                            18,
+                        fontWeight:
+                            FontWeight.bold,
+                        color:
+                            Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
