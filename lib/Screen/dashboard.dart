@@ -1,12 +1,15 @@
-import 'package:aura_care/Screen/bmi.dart';
+import 'package:aura_care/Screen/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardScreen
     extends
         StatefulWidget {
+  final String
+  emaill;
   const DashboardScreen({
     super.key,
+    required this.emaill,
   });
 
   @override
@@ -26,29 +29,40 @@ class _DashboardScreenState
   _selectedIndex =
       0;
 
-  final List<
+  late List<
     Widget
   >
-  _pages = <
-    Widget
-  >[
-    Center(
-      child: Text(
-        'Home Page',
+  _pages;
+
+  @override
+  void
+  initState() {
+    super
+        .initState();
+    _pages = <
+      Widget
+    >[
+      Center(
+        child: Text(
+          'Home Page',
+        ),
+      ), // index 0
+      Menu(
+        email:
+            widget.emaill,
       ),
-    ), // index 0
-    Center(
-      child: Text(
-        'Menu Page',
+      Center(
+        child: Text(
+          'Chatbot',
+        ),
       ),
-    ), // index 1
-    Center(
-      child: Text(
-        'Chatbot',
+      Center(
+        child: Text(
+          'Profile',
+        ),
       ),
-    ),
-    BMIScreen(),
-  ];
+    ];
+  }
 
   void
   _onItemTapped(
@@ -118,7 +132,7 @@ class _DashboardScreenState
         unselectedItemColor:
             Colors.grey,
         selectedItemColor:
-            Colors.black,
+            Colors.green,
         showSelectedLabels:
             true,
         showUnselectedLabels:
