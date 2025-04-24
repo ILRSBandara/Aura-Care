@@ -1,8 +1,9 @@
+import 'package:aura_care/Screen/health_data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class WeeklyCaloriesChart extends StatelessWidget {
-  const WeeklyCaloriesChart({super.key});
+  const WeeklyCaloriesChart({super.key, required Map<String, HealthData> healthData});
 
   @override
   Widget build(BuildContext context) {

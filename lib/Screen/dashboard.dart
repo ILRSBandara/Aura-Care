@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'bmi.dart';            // your existing BMI screen
-import 'health_data.dart';   // new Health Data screen (create this)
+// new Health Data screen (create this)
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -39,6 +39,22 @@ class DashboardScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HealthDataScreen extends StatelessWidget {
+  const HealthDataScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Health Data'),
+      ),
+      body: const Center(
+        child: Text('Health Data Screen Content'),
       ),
     );
   }

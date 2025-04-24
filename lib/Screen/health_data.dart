@@ -1,44 +1,58 @@
-// lib/screens/health_data.dart
-
+import 'package:aura_care/Screen/date_picker_strip.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';  // Import for the charts
-import 'date_picker_strip.dart';        // Import the date strip widget
-import 'package:percent_indicator/percent_indicator.dart'; // Import for CircularPercentIndicator
+// Ensure this import points to the correct file
 
-class HealthDataScreen extends StatelessWidget {
-  const HealthDataScreen({super.key});
+import 'weekly_calories_chart.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: const Text('Statistics'),
-        centerTitle: true,
-      ),
-      body: const HealthDataBody(),
-      bottomNavigationBar: const MyBottomNavBar(currentIndex: 2),
-    );
-  }
+// MODEL
+class HealthData {
+  final double sleepHours;
+  final double calorieIntake;
+  final int steps;
+
+  HealthData({required this.sleepHours, required this.calorieIntake, required this.steps});
 }
 
-class HealthDataBody extends StatelessWidget {
+class HealthDataBody extends StatefulWidget {
   const HealthDataBody({super.key});
 
   @override
+  State<HealthDataBody> createState() => _HealthDataBodyState();
+}
+
+class _HealthDataBodyState extends State<HealthDataBody> {
+  DateTime selectedDate = DateTime.now();
+
+  final Map<String, HealthData> weeklyHealth = {
+    'Mon': HealthData(sleepHours: 6.2, calorieIntake: 900, steps: 2400),
+    'Tue': HealthData(sleepHours: 5.5, calorieIntake: 1020, steps: 3000),
+    'Wed': HealthData(sleepHours: 6.08, calorieIntake: 1050, steps: 2015),
+    'Thu': HealthData(sleepHours: 7.0, calorieIntake: 1200, steps: 3200),
+    'Fri': HealthData(sleepHours: 6.5, calorieIntake: 950, steps: 5000),
+    'Sat': HealthData(sleepHours: 8.0, calorieIntake: 1100, steps: 6200),
+    'Sun': HealthData(sleepHours: 7.2, calorieIntake: 980, steps: 4500),
+  };
+
+  @override
   Widget build(BuildContext context) {
+    String selectedDay = _getWeekdayString(selectedDate);
+    final currentData = weeklyHealth[selectedDay]!;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          // 1. Month & Date strip
-          DatePickerStrip(),  // Add the DateStrip here
+        children: [
+          // 🔹 Custom calendar strip
+          DatePickerStrip(
+            initialDate: selectedDate,
+            onDateSelected: (date) {
+              setState(() => selectedDate = date);
+            },
+          ),
 
-          // 2. Overview cards
-          OverviewCards(),
+          const OverviewCards(),
 
-          // 3. Section title
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               'Daily progress',
@@ -46,123 +60,53 @@ class HealthDataBody extends StatelessWidget {
             ),
           ),
 
-          // 4. Concentric progress rings + legend
-          DailyProgress(),
+          // Ensure the DailyProgress widget is defined or imported correctly
+          DailyProgress(data: currentData), // Define or import this widget
 
-          // 5. Calories header + dropdown
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Calories', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text('Calories', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 DropdownIndicator(options: ['Weekly', 'Monthly'], selected: 'Weekly'),
               ],
             ),
           ),
 
-          // 6. Bar chart
-          WeeklyCaloriesChart(),
+          WeeklyCaloriesChart(healthData: weeklyHealth),
         ],
       ),
     );
   }
-}
 
-
-
-/// Stub implementations below — replace with the full versions
-class DatePickerStrip extends StatelessWidget {
-  const DatePickerStrip({super.key});
-  @override
-  Widget build(BuildContext c) => const SizedBox(height: 80, child: Center(child: Text('Date Strip')));
-}
-
-class OverviewCards extends StatelessWidget {
-  const OverviewCards({super.key});
-  @override
-  Widget build(BuildContext c) => const SizedBox(height: 120, child: Center(child: Text('Overview Cards')));
+  // Converts DateTime to short weekday (e.g. Mon, Tue)
+  String _getWeekdayString(DateTime date) {
+    const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return weekdays[date.weekday - 1];
+  }
+  
+  // ignore: non_constant_identifier_names
+  DropdownIndicator({required List<String> options, required String selected}) {}
 }
 
 class DailyProgress extends StatelessWidget {
-  const DailyProgress({super.key});
- @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 200,
-          height: 200,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CircularPercentIndicator(
-                radius: 100,
-                lineWidth: 12,
-                percent: 6.083 / 8,  // Sleep percentage
-                progressColor: Colors.lightBlue,
-                backgroundColor: Colors.blue.shade50,
-              ),
-              CircularPercentIndicator(
-                radius: 80,
-                lineWidth: 12,
-                percent: 1050 / 2000,  // Calories percentage
-                progressColor: Colors.redAccent,
-                backgroundColor: Colors.red.shade50,
-              ),
-              CircularPercentIndicator(
-                radius: 60,
-                lineWidth: 12,
-                percent: 2015 / 6000,  // Steps percentage
-                progressColor: Colors.amber,
-                backgroundColor: Colors.yellow.shade50,
-              ),
-            ],
-          ),
-        ),
-        // Add text or legend here
-      ],
-    );
-  }
-}
+  final HealthData data;
 
-class DropdownIndicator extends StatelessWidget {
-  final List<String> options;
-  final String selected;
-  const DropdownIndicator({required this.options, required this.selected, super.key});
+  const DailyProgress({super.key, required this.data});
 
   @override
-  Widget build(BuildContext c) => DropdownButton<String>(
-        value: selected,
-        items: options.map((o) => DropdownMenuItem(value: o, child: Text(o))).toList(),
-        onChanged: (_) {},
-      );
-}
-
-class WeeklyCaloriesChart extends StatelessWidget {
-  const WeeklyCaloriesChart({super.key});
- @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: BarChart(
-        BarChartData(
-          alignment: BarChartAlignment.spaceAround,
-          titlesData: FlTitlesData(
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: true),
-            ),
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          ),
-          borderData: FlBorderData(show: false),
-          barGroups: [
-            BarChartGroupData(x: 0, barRods: [
-              BarChartRodData(toY: 500, width: 16, color: Colors.blue),
-            ]),
-            BarChartGroupData(x: 1, barRods: [
-              BarChartRodData(toY: 600, width: 16, color: Colors.blue),
-            ]),
-            // Add other days of the week here
+    return Card(
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Steps: ${data.steps}', style: const TextStyle(fontSize: 16)),
+            Text('Sleep Hours: ${data.sleepHours}', style: const TextStyle(fontSize: 16)),
+            Text('Calorie Intake: ${data.calorieIntake}', style: const TextStyle(fontSize: 16)),
           ],
         ),
       ),
@@ -170,24 +114,24 @@ class WeeklyCaloriesChart extends StatelessWidget {
   }
 }
 
-/// Your existing bottom nav bar
-class MyBottomNavBar extends StatelessWidget {
-  final int currentIndex;
-  const MyBottomNavBar({required this.currentIndex, super.key});
+class OverviewCards extends StatelessWidget {
+  const OverviewCards({super.key});
 
   @override
-  Widget build(BuildContext c) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.medical_services), label: 'Doctors'),
-        BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Statistics'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-      ],
-      onTap: (i) {
-        // handle navigation…
-      },
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text('Overview', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 8),
+            Text('Details about health data go here.'),
+          ],
+        ),
+      ),
     );
   }
 }
