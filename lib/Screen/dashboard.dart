@@ -1,7 +1,8 @@
 // lib/screens/dashboard.dart
 
 import 'package:flutter/material.dart';
-import 'bmi.dart'; // Make sure this path is correct
+import 'bmi.dart';            // your existing BMI screen
+import 'health_data.dart';   // new Health Data screen (create this)
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -14,14 +15,29 @@ class DashboardScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BMIScreen()),
-            );
-          },
-          child: const Text('Open BMI Calculator'),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,       // center vertically
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const BMIScreen()),
+                );
+              },
+              child: const Text('Open BMI Calculator'),
+            ),
+            const SizedBox(height: 16),          // spacing between buttons
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HealthDataScreen()),
+                );
+              },
+              child: const Text('Health Data'),
+            ),
+          ],
         ),
       ),
     );
