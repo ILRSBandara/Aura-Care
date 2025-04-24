@@ -1,7 +1,8 @@
 // lib/screens/health_data.dart
 
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart'; // Import the fl_chart package
+import 'package:fl_chart/fl_chart.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart'; // Import the fl_chart package
 
 // If you put the helper widgets in separate files, import them:
 // import 'date_picker_strip.dart';
@@ -89,8 +90,44 @@ class OverviewCards extends StatelessWidget {
 
 class DailyProgress extends StatelessWidget {
   const DailyProgress({super.key});
-  @override
-  Widget build(BuildContext c) => const SizedBox(height: 200, child: Center(child: Text('Rings & Legend')));
+ @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 200,
+          height: 200,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              CircularPercentIndicator(
+                radius: 100,
+                lineWidth: 12,
+                percent: 6.083 / 8,  // Sleep percentage
+                progressColor: Colors.lightBlue,
+                backgroundColor: Colors.blue.shade50,
+              ),
+              CircularPercentIndicator(
+                radius: 80,
+                lineWidth: 12,
+                percent: 1050 / 2000,  // Calories percentage
+                progressColor: Colors.redAccent,
+                backgroundColor: Colors.red.shade50,
+              ),
+              CircularPercentIndicator(
+                radius: 60,
+                lineWidth: 12,
+                percent: 2015 / 6000,  // Steps percentage
+                progressColor: Colors.amber,
+                backgroundColor: Colors.yellow.shade50,
+              ),
+            ],
+          ),
+        ),
+        // Add text or legend here
+      ],
+    );
+  }
 }
 
 class DropdownIndicator extends StatelessWidget {
