@@ -1,15 +1,9 @@
 // lib/screens/health_data.dart
 
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart'; // Import the fl_chart package
-
-// If you put the helper widgets in separate files, import them:
-// import 'date_picker_strip.dart';
-// import 'overview_cards.dart';
-// import 'daily_progress.dart';
-// import 'weekly_calories_chart.dart';
-// import 'bottom_nav_bar.dart';
+import 'package:fl_chart/fl_chart.dart';  // Import for the charts
+import 'date_picker_strip.dart';        // Import the date strip widget
+import 'package:percent_indicator/percent_indicator.dart'; // Import for CircularPercentIndicator
 
 class HealthDataScreen extends StatelessWidget {
   const HealthDataScreen({super.key});
@@ -38,7 +32,7 @@ class HealthDataBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           // 1. Month & Date strip
-          DatePickerStrip(),
+          DatePickerStrip(),  // Add the DateStrip here
 
           // 2. Overview cards
           OverviewCards(),
@@ -74,6 +68,8 @@ class HealthDataBody extends StatelessWidget {
     );
   }
 }
+
+
 
 /// Stub implementations below — replace with the full versions
 class DatePickerStrip extends StatelessWidget {
