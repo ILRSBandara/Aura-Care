@@ -1,0 +1,151 @@
+import 'package:flutter/material.dart';
+import 'doctor_profile_screen.dart';  // Assuming you have this profile screen already.
+
+class Doctor {
+  final String name;
+  final String specialty;
+  final String imageAssetPath;  // Local image path
+
+  Doctor({
+    required this.name,
+    required this.specialty,
+    required this.imageAssetPath,  // Use local image path here
+  });
+}
+
+class DoctorListScreen extends StatefulWidget {
+  const DoctorListScreen({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _DoctorListScreenState createState() => _DoctorListScreenState();
+}
+
+class _DoctorListScreenState extends State<DoctorListScreen> {
+  // Sample doctor data with local images
+  final List<Doctor> doctors = [
+    Doctor(
+      name: "Dr. Bellamy N",
+      specialty: "Virologist",
+      imageAssetPath: "assets/Images/doctor1.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Mensah T",
+      specialty: "Oncologist",
+      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Klimisch J",
+      specialty: "Surgeon",
+      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
+    ),
+    // Add other doctors...
+  ];
+
+  List<Doctor> filteredDoctors = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredDoctors = doctors;
+  }
+
+  // Function to filter doctors based on search input
+  void filterDoctors(String query) {
+    setState(() {
+      filteredDoctors = doctors.where((doctor) {
+        return doctor.name.toLowerCase().contains(query.toLowerCase()) ||
+               doctor.specialty.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Doctors'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.filter_list),
+            onPressed: () {
+              // You can add filter functionality here
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // Search Bar
+            TextField(
+              onChanged: filterDoctors,
+              decoration: InputDecoration(
+                hintText: 'Search for doctors...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              ),
+            ),
+            SizedBox(height: 16),
+            // Doctor List
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: filteredDoctors.length,
+                itemBuilder: (context, index) {
+                  final doctor = filteredDoctors[index];
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to the doctor's profile screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DoctorProfileScreen(doctor: doctor),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      elevation: 4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              doctor.imageAssetPath,  // Load local image
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            doctor.name,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            doctor.specialty,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
