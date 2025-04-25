@@ -27,7 +27,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     Doctor(
       name: "Dr. Bellamy N",
       specialty: "Virologist",
-      imageAssetPath: "assets/Images/doctor1.jpg",  // Local image path
+      imageAssetPath: "assets/Images/doctor6.jpg",  // Local image path
     ),
     Doctor(
       name: "Dr. Mensah T",
@@ -37,7 +37,22 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     Doctor(
       name: "Dr. Klimisch J",
       specialty: "Surgeon",
-      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
+      imageAssetPath: "assets/Images/doctor5.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Klimisch J",
+      specialty: "Surgeon",
+      imageAssetPath: "assets/Images/doctor1.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Klimisch J",
+      specialty: "Surgeon",
+      imageAssetPath: "assets/Images/doctor6.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Klimisch J",
+      specialty: "Surgeon",
+      imageAssetPath: "assets/Images/gounder.jpg",  // Local image path
     ),
     // Add other doctors...
   ];
@@ -64,15 +79,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctors'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.filter_list),
-            onPressed: () {
-              // You can add filter functionality here
-            },
-          ),
-        ],
+        title: const Text('Doctors'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
