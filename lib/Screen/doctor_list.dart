@@ -25,44 +25,44 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
   // Sample doctor data with local images
   final List<Doctor> doctors = [
     Doctor(
-      name: "Dr. Bellamy N",
-      specialty: "Virologist",
-      imageAssetPath: "assets/Images/doctor4.jpg",  // Local image path
+      name: "Dr. Vardh Shaneru",
+      specialty: "psychologists",
+      imageAssetPath: "assets/Images/doctor4.jpg",  
+    ),
+    Doctor(
+      name: "Dr. Senuka Wathsal",
+      specialty: "psychiatrists",
+      imageAssetPath: "assets/Images/doctor3.jpg",  
+    ),
+    Doctor(
+      name: "Dr. Kiyan Sadesh",
+      specialty: "Primary Care Physicians",
+      imageAssetPath: "assets/Images/doctor5.jpg",  
+    ),
+    Doctor(
+      name: "Dr. Arashi Perera",
+      specialty: "psychiatrists",
+      imageAssetPath: "assets/Images/doctor1.jpg",  
+    ),
+    Doctor(
+      name: "Dr. Thomas Nikol",
+      specialty: "Pediatric Psychiatrists",
+      imageAssetPath: "assets/Images/doctor6.jpg",  
+    ),
+    Doctor(
+      name: "Dr. Shevon Dias",
+      specialty: "Psychopharmacologists",
+      imageAssetPath: "assets/Images/gounder.jpg",  
     ),
     Doctor(
       name: "Dr. Mensah T",
-      specialty: "Oncologist",
-      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
+      specialty: "Online directories",
+      imageAssetPath: "assets/Images/doctor3.jpg",  
     ),
     Doctor(
-      name: "Dr. Klimisch J",
-      specialty: "Surgeon",
-      imageAssetPath: "assets/Images/doctor5.jpg",  // Local image path
-    ),
-    Doctor(
-      name: "Dr. Klimisch J",
-      specialty: "Surgeon",
-      imageAssetPath: "assets/Images/doctor1.jpg",  // Local image path
-    ),
-    Doctor(
-      name: "Dr. Klimisch J",
-      specialty: "Surgeon",
-      imageAssetPath: "assets/Images/doctor6.jpg",  // Local image path
-    ),
-    Doctor(
-      name: "Dr. Klimisch J",
-      specialty: "Surgeon",
-      imageAssetPath: "assets/Images/gounder.jpg",  // Local image path
-    ),
-    Doctor(
-      name: "Dr. Mensah T",
-      specialty: "Oncologist",
-      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
-    ),
-    Doctor(
-      name: "Dr. Mensah T",
-      specialty: "Oncologist",
-      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
+      name: "Dr. Prakash Soyza",
+      specialty: "Psychiatric-Mental Health Nurse Practitioners (PMHNP)",
+      imageAssetPath: "assets/Images/doctor3.jpg",  
     ),
     // Add other doctors...
   ];

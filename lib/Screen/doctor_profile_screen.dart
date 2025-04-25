@@ -35,12 +35,12 @@ class DoctorProfileScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Dr. Bellamy Nicholas is a top specialist at London Bridge Hospital...',
+              ' doctor of medicine (M.D.) or doctor of osteopathic medicine (D.O.) — who specializes in mental health. This type of doctor may further specialize in areas such as child and adolescent, geriatric, or addiction psychiatry.',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 50),
             Text(
-              '- Working Time: Mon - Sat (08:30 AM - 09:00 PM)\n\n- Telephone: +44 20 7407 3100\n\n- Email: abcd@gmail.com\n\n- Clinic Location: London Bridge Hospital, 27 Tooley St, London SE1 2PR, United Kingdom\n\n- Address: 123 Main St, London, UK',
+              '- Working Time: Sat - Sun (08:30 AM - 09:00 PM)\n\n- Telephone: +11 20 7407 3100\n\n- Email: Doctor@gmail.com\n\n- Clinic Location: Aurora Family Medical Practice, Battaramulla\n\n- Address:  422/9 Overn Gunawardena Mawatha, Sri Jayawardenepura Kotte',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
