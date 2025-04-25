@@ -62,7 +62,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     Doctor(
       name: "Dr. Prakash Soyza",
       specialty: "Psychiatric-Mental Health Nurse Practitioners (PMHNP)",
-      imageAssetPath: "assets/Images/doctor3.jpg",  
+      imageAssetPath: "assets/Images/doctor1.jpg",  
     ),
     // Add other doctors...
   ];
