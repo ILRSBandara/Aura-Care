@@ -27,7 +27,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     Doctor(
       name: "Dr. Bellamy N",
       specialty: "Virologist",
-      imageAssetPath: "assets/Images/doctor6.jpg",  // Local image path
+      imageAssetPath: "assets/Images/doctor4.jpg",  // Local image path
     ),
     Doctor(
       name: "Dr. Mensah T",
@@ -53,6 +53,16 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
       name: "Dr. Klimisch J",
       specialty: "Surgeon",
       imageAssetPath: "assets/Images/gounder.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Mensah T",
+      specialty: "Oncologist",
+      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
+    ),
+    Doctor(
+      name: "Dr. Mensah T",
+      specialty: "Oncologist",
+      imageAssetPath: "assets/Images/doctor3.jpg",  // Local image path
     ),
     // Add other doctors...
   ];

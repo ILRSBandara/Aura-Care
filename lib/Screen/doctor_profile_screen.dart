@@ -18,7 +18,7 @@ class DoctorProfileScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 75,
-              backgroundImage: NetworkImage(doctor.imageAssetPath),
+              backgroundImage: AssetImage(doctor.imageAssetPath), // Use AssetImage for local images
             ),
             SizedBox(height: 16),
             Text(
@@ -29,27 +29,21 @@ class DoctorProfileScreen extends StatelessWidget {
               doctor.specialty,
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 25),
             Text(
-              'About Doctor:',
+              'About Doctor',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
               'Dr. Bellamy Nicholas is a top specialist at London Bridge Hospital...',
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 50),
             Text(
-              'Working Time: Mon - Sat (08:30 AM - 09:00 PM)',
-              style: TextStyle(fontSize: 16),
+              '- Working Time: Mon - Sat (08:30 AM - 09:00 PM)\n\n- Telephone: +44 20 7407 3100\n\n- Email: abcd@gmail.com\n\n- Clinic Location: London Bridge Hospital, 27 Tooley St, London SE1 2PR, United Kingdom\n\n- Address: 123 Main St, London, UK',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Book appointment logic here
-              },
-              child: Text('Book Appointment'),
-            ),
           ],
         ),
       ),
