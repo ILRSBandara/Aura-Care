@@ -1,7 +1,7 @@
+import 'package:aura_care/Screen/daily_check_In_screen.dart';
 import 'package:flutter/material.dart';
-import 'bmi.dart';            // your existing BMI screen
-// your existing HealthDataScreen
-import 'doctor_list.dart';   // import your doctor_list.dart
+import 'bmi.dart';             // your existing BMI screen
+import 'doctor_list.dart';    // import your doctor_list.dart
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -15,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,       // center vertically
+          mainAxisSize: MainAxisSize.min, // center vertically
           children: [
             ElevatedButton(
               onPressed: () {
@@ -26,7 +26,8 @@ class DashboardScreen extends StatelessWidget {
               },
               child: const Text('Open BMI Calculator'),
             ),
-            const SizedBox(height: 16),          // spacing between buttons
+            const SizedBox(height: 16), 
+
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -36,16 +37,28 @@ class DashboardScreen extends StatelessWidget {
               },
               child: const Text('Health Data'),
             ),
-            const SizedBox(height: 16),          // spacing between buttons
+            const SizedBox(height: 16),
+
             ElevatedButton(
               onPressed: () {
-                // Navigate to the Doctor List Screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const DoctorListScreen()),
                 );
               },
               child: const Text('Doctor Details'),
+            ),
+            const SizedBox(height: 16),
+
+            // 🔥 New Button for DailyCheckInScreen
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const DailyCheckInScreen()),
+                );
+              },
+              child: const Text('Daily Check-in Screen'),
             ),
           ],
         ),
@@ -54,6 +67,8 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
+// -----------------------------
+// Your Health Data Screen (Simple One)
 class HealthDataScreen extends StatelessWidget {
   const HealthDataScreen({super.key});
 
