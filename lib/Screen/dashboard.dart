@@ -1,4 +1,5 @@
 import 'package:aura_care/Screen/daily_check_In_screen.dart';
+import 'package:aura_care/Screen/gemini_ai.dart';
 import 'package:flutter/material.dart';
 import 'bmi.dart';             // your existing BMI screen
 import 'doctor_list.dart';    // import your doctor_list.dart
@@ -26,7 +27,7 @@ class DashboardScreen extends StatelessWidget {
               },
               child: const Text('Open BMI Calculator'),
             ),
-            const SizedBox(height: 16), 
+            const SizedBox(height: 16),
 
             ElevatedButton(
               onPressed: () {
@@ -60,12 +61,25 @@ class DashboardScreen extends StatelessWidget {
               },
               child: const Text('Daily Check-in Screen'),
             ),
+            const SizedBox(height: 16),
+
+            // 👇 New Button for AI-Chatbot
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const GeminiChatBot()),
+                );
+              },
+              child: const Text('AI-Chatbot'),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
 
 // -----------------------------
 // Your Health Data Screen (Simple One)
