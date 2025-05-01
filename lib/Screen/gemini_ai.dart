@@ -1,9 +1,10 @@
-import 'package:aura_care/Screen/model.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-// ignore: unused_import
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
 
+import 'model.dart';
 
 class GeminiChatBot extends StatefulWidget {
   const GeminiChatBot({super.key});
@@ -12,168 +13,157 @@ class GeminiChatBot extends StatefulWidget {
 }
 
 class _GeminiChatBotState extends State<GeminiChatBot> {
-  // ignore: non_constant_identifier_names
-  TextEditingController PromptController = TextEditingController();
-  static const apiKey = "AIzaSyC7Q7OrHoSofUeg99-HZGz5bkmQq6TKOHE";
-  final model = GenerativeAiModel(modelName: "gemini-pro", apiKey: apiKey); // Replace with the correct parameter name
+  TextEditingController promprController = TextEditingController();
+  static const apiKey = "AIzaSyCfDS3gMcMRLp6GURkLwHEe7WQZnHIKGz8";
+  final model = GenerativeModel(model: "gemini-pro", apiKey: apiKey);
 
-// ignore: non_constant_identifier_names
-final List<ModelMessage> Prompt = [];
-Future<void> sendMessage()async { 
-  final message = PromptController.text;
-  //for prompt
-  setState(() {
-    PromptController.clear();
-    Prompt.add(
-      ModelMessage(
-        isPrompt: true, 
-        message: message, 
-        time: DateTime.now(),
-      ),
-    );
-  });
-  //for respond
-  final content = [Content.text(message)];
-  final response = await model.generateContent(content);
-  setState(() {
-    Prompt.add(
-      ModelMessage(
-        isPrompt: false, 
-        message: response.text ?? "", 
-        time: DateTime.now(),
-      ),
-    );
-  });
-} 
+  final List<ModelMessage> prompt = [];
+
+  Future<void> sendMessage() async {
+    final message = promprController.text;
+    // for prompt
+    setState(() {
+      promprController.clear();
+      prompt.add(
+        ModelMessage(
+          isPrompt: true,
+          message: message,
+          time: DateTime.now(),
+        ),
+      );
+    });
+    // for respond
+    final content = [Content.text(message)];
+  
+    // Call the Gemini API to get the response
+    final response = await model.generateContent(content);
+
+    // Log the response to check its structure
+    // ignore: avoid_print
+    print('Response: ${response.toString()}'); 
+
+    // Check if the response has text and update the prompt with the response
+    setState(() {
+      prompt.add(
+        ModelMessage(
+          isPrompt: false,
+          message: response.text ?? "No response received.",
+          time: DateTime.now(),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 147, 241, 196),
+      backgroundColor: Colors.blue[100],
       appBar: AppBar(
         elevation: 3,
-         backgroundColor: const Color.fromARGB(255, 147, 241, 196),
-        title: const Text("AI Chatbot"),
-        ),
-       body: Column(
+        backgroundColor: Colors.blue[100],
+        title: const Text("AI ChatBot"),
+      ),
+      body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount:Prompt.length ,
-              itemBuilder: (context, index) {
-                final message = Prompt[index];
-                return UserPrompt(
-                  isPrompt: message.isPrompt, 
-                  message: message.message, 
-                  date: DateFormat('hh:mm a').format(
-                    message.time,
-                    ),);
-              },
-            ),
-          ),
+              child: ListView.builder(
+                  itemCount: prompt.length,
+                  itemBuilder: (context, index) {
+                    final message = prompt[index];
+                    return UserPrompt(
+                      isPrompt: message.isPrompt,
+                      message: message.message,
+                      date: DateFormat('hh:mm a').format(
+                        message.time,
+                      ),
+                    );
+                  })),
           Padding(
-            padding:EdgeInsets.all(25),
+            padding: const EdgeInsets.all(25),
             child: Row(
               children: [
                 Expanded(
                   flex: 20,
                   child: TextField(
-                    controller: PromptController,
-                    style: TextStyle(
+                    controller: promprController,
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
-                      ),
-                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      hintText: "Enter a Prompt Here"
-                      ), 
                     ),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        hintText: "Enter a prompt here"),
                   ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      sendMessage();
-                     },
-                  child: CircleAvatar(
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    sendMessage();
+                  },
+                  child: const CircleAvatar(
                     radius: 29,
-                    backgroundColor: const Color.fromARGB(255, 2, 199, 104),
+                    backgroundColor: Colors.green,
                     child: Icon(
                       Icons.send,
                       color: Colors.white,
                       size: 32,
-                      ),
-                      ),
-                  )
-                  ],
+                    ),
                   ),
-        ),
-       ],
-      ), 
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  // ignore: non_constant_identifier_names
+
   Container UserPrompt({
     required final bool isPrompt,
-    required String message, 
+    required String message,
     required String date,
-    }) {
+  }) {
     return Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(15),
-                margin: EdgeInsets.symmetric(vertical: 15).copyWith(
-                  left: isPrompt ? 80 : 15,
-                  right: isPrompt ? 15 : 80
-                  ),
-                decoration: BoxDecoration(
-                color: isPrompt ?Colors.green:Colors.grey,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: isPrompt ? Radius.circular(20) : Radius.zero,
-                ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // for prompt and respond
-                    Text(
-                      message,
-                      style: TextStyle(
-                        fontWeight: isPrompt  
-                        ? FontWeight.bold 
-                        : FontWeight.normal,
-                        fontSize: 18,
-                        color: isPrompt 
-                        ? Colors.white
-                        :Colors.black, 
-                        ),
-                        ),
-                        //for prompt and respond time
-                        Text(
-                      date,
-                      style: TextStyle(
-                        
-                        fontSize: 14,
-                        color: isPrompt 
-                        ? Colors.white
-                        :Colors.black, 
-                        ),
-                        ),
-                   ],
-                ),
-              );
+      width: double.infinity,
+      padding: const EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(vertical: 15).copyWith(
+        left: isPrompt ? 80 : 15,
+        right: isPrompt ? 15 : 80,
+      ),
+      decoration: BoxDecoration(
+        color: isPrompt ? Colors.green : Colors.grey,
+        borderRadius: BorderRadius.only(
+          topLeft: const Radius.circular(20),
+          topRight: const Radius.circular(20),
+          bottomLeft: isPrompt ?const Radius.circular(20):Radius.zero,
+          bottomRight: isPrompt? Radius.zero:const Radius.circular(20),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // for prompt and respond
+          Text(
+            message,
+            style: TextStyle(
+              fontWeight: isPrompt ? FontWeight.bold : FontWeight.normal,
+              fontSize: 18,
+              color: isPrompt ? Colors.white : Colors.black,
+            ),
+          ),
+          // for prompt and respond time
+          Text(
+            date,
+            style: TextStyle(
+              fontSize: 14,
+              color: isPrompt ? Colors.white : Colors.black,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
-
-class GenerativeAiModel {
-  final String modelName;
-  final String apiKey;
-
-  GenerativeAiModel({required this.modelName, required this.apiKey});
-  
-  generateContent(List<Content> content) {}
-}
-
