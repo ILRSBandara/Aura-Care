@@ -1,4 +1,6 @@
+import 'package:aura_care/Screen/home.dart';
 import 'package:aura_care/Screen/menu.dart';
+import 'package:aura_care/Screen/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -42,11 +44,7 @@ class _DashboardScreenState
     _pages = <
       Widget
     >[
-      Center(
-        child: Text(
-          'Home Page',
-        ),
-      ), // index 0
+      HomePage(), // index 0
       Menu(
         email:
             widget.emaill,
@@ -56,11 +54,7 @@ class _DashboardScreenState
           'Chatbot',
         ),
       ),
-      Center(
-        child: Text(
-          'Profile',
-        ),
-      ),
+      ProfileDisplayData(),
     ];
   }
 
@@ -101,10 +95,10 @@ class _DashboardScreenState
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.menu,
+              Icons.punch_clock,
             ),
             label:
-                'Menu',
+                'Reminder',
             backgroundColor:
                 Colors.white,
           ),

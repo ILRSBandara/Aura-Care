@@ -1,4 +1,9 @@
 import 'package:aura_care/Screen/bmi.dart';
+import 'package:aura_care/Screen/doctorList.dart';
+import 'package:aura_care/Screen/exercise.dart';
+import 'package:aura_care/Screen/goo.dart';
+import 'package:aura_care/Screen/workout/workout_view.dart';
+import 'package:aura_care/Screen/workout/workout_view_2.dart';
 import 'package:flutter/material.dart';
 
 class Menu
@@ -35,26 +40,23 @@ class _MenuState
           Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(
-            20.0,
+          padding: const EdgeInsets.only(
+            left:
+                20,
+            right:
+                20,
           ),
           child: Column(
             children: [
-              SizedBox(
-                height:
-                    40,
-              ),
               Row(
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left:
-                          10,
-                    ),
+                    padding:
+                        const EdgeInsets.only(),
                     child: Text(
-                      "Welcome Back",
+                      "Hello, Kasuni Madara",
                       style: TextStyle(
                         fontWeight:
                             FontWeight.bold,
@@ -80,7 +82,7 @@ class _MenuState
                     199,
                   ),
                   borderRadius: BorderRadius.circular(
-                    10.0,
+                    8.0,
                   ),
                   border: Border.all(
                     color:
@@ -102,18 +104,41 @@ class _MenuState
               ),
               SizedBox(
                 height:
+                    15,
+              ),
+              AutoSlidingBanner(
+                imageUrls: [
+                  'assets/Images/1.png',
+                  'assets/Images/2.png',
+                  'assets/Images/3.png',
+                  'assets/Images/4.png',
+                  'assets/Images/5.png',
+                  'assets/Images/6.png',
+                  'assets/Images/7.png',
+                ],
+              ),
+              SizedBox(
+                height:
                     20,
               ),
+
               Container(
-                padding: const EdgeInsets.all(
-                  20,
+                padding: const EdgeInsets.only(
+                  left:
+                      15,
+                  right:
+                      15,
+                  top:
+                      10,
+                  bottom:
+                      10,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    20,
+                    15,
                   ),
                   color:
-                      Colors.blue[100],
+                      Colors.green[100],
                 ),
                 child: Row(
                   crossAxisAlignment:
@@ -126,7 +151,7 @@ class _MenuState
                           CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Item 01",
+                          "Health Tracker",
                           style: TextStyle(
                             fontSize:
                                 18,
@@ -136,14 +161,14 @@ class _MenuState
                         ),
                         const SizedBox(
                           height:
-                              10,
+                              5,
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<
                               Color
                             >(
-                              Colors.blue,
+                              Colors.green,
                             ),
                           ),
                           onPressed: () {
@@ -154,7 +179,7 @@ class _MenuState
                                     (
                                       context,
                                     ) =>
-                                        const BMIScreen(),
+                                        const WorkoutView2(),
                               ),
                             );
                           },
@@ -173,9 +198,9 @@ class _MenuState
                     Column(
                       children: [
                         Image.asset(
-                          'assets/Images/auraCareMainLogo.png',
+                          'assets/Images/health.png',
                           width:
-                              75,
+                              83,
                         ),
                       ],
                     ),
@@ -187,12 +212,19 @@ class _MenuState
                     15,
               ),
               Container(
-                padding: const EdgeInsets.all(
-                  20,
+                padding: const EdgeInsets.only(
+                  left:
+                      15,
+                  right:
+                      15,
+                  top:
+                      10,
+                  bottom:
+                      10,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    20,
+                    15,
                   ),
                   color:
                       Colors.orange[100],
@@ -208,7 +240,7 @@ class _MenuState
                           CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "BMI Tracker",
+                          "Fitness Courses",
                           style: TextStyle(
                             fontSize:
                                 18,
@@ -218,7 +250,7 @@ class _MenuState
                         ),
                         const SizedBox(
                           height:
-                              10,
+                              5,
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
@@ -226,6 +258,96 @@ class _MenuState
                               Color
                             >(
                               Colors.orange,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (
+                                      context,
+                                    ) =>
+                                        HomePage2(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Learn now',
+                            style: TextStyle(
+                              color:
+                                  Colors.white,
+                              fontSize:
+                                  12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Image.asset(
+                          'assets/Images/exercise.png',
+                          width:
+                              73,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height:
+                    15,
+              ),
+
+              Container(
+                padding: const EdgeInsets.only(
+                  left:
+                      15,
+                  right:
+                      15,
+                  top:
+                      10,
+                  bottom:
+                      10,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    15,
+                  ),
+                  color:
+                      Colors.purple[100],
+                ),
+                child: Row(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "BMI Calculator",
+                          style: TextStyle(
+                            fontSize:
+                                18,
+                            fontWeight:
+                                FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height:
+                              5,
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<
+                              Color
+                            >(
+                              Colors.purple,
                             ),
                           ),
                           onPressed: () {
@@ -269,15 +391,22 @@ class _MenuState
                     15,
               ),
               Container(
-                padding: const EdgeInsets.all(
-                  20,
+                padding: const EdgeInsets.only(
+                  left:
+                      15,
+                  right:
+                      15,
+                  top:
+                      10,
+                  bottom:
+                      10,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    20,
+                    15,
                   ),
                   color:
-                      Colors.green[100],
+                      Colors.blue[100],
                 ),
                 child: Row(
                   crossAxisAlignment:
@@ -290,7 +419,7 @@ class _MenuState
                           CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Item 03",
+                          "Doctor Gallery",
                           style: TextStyle(
                             fontSize:
                                 18,
@@ -300,14 +429,14 @@ class _MenuState
                         ),
                         const SizedBox(
                           height:
-                              10,
+                              5,
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<
                               Color
                             >(
-                              Colors.green,
+                              Colors.blue,
                             ),
                           ),
                           onPressed: () {
@@ -318,12 +447,12 @@ class _MenuState
                                     (
                                       context,
                                     ) =>
-                                        const BMIScreen(),
+                                        const DoctorListScreen(),
                               ),
                             );
                           },
                           child: const Text(
-                            'Track now',
+                            'Search now',
                             style: TextStyle(
                               color:
                                   Colors.white,
@@ -337,9 +466,9 @@ class _MenuState
                     Column(
                       children: [
                         Image.asset(
-                          'assets/Images/auraCareMainLogo.png',
+                          'assets/Images/doctor.png',
                           width:
-                              75,
+                              70,
                         ),
                       ],
                     ),
@@ -351,94 +480,19 @@ class _MenuState
                     15,
               ),
               Container(
-                padding: const EdgeInsets.all(
-                  20,
+                padding: const EdgeInsets.only(
+                  left:
+                      15,
+                  right:
+                      15,
+                  top:
+                      10,
+                  bottom:
+                      10,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    20,
-                  ),
-                  color:
-                      Colors.purple[100],
-                ),
-                child: Row(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Item 04",
-                          style: TextStyle(
-                            fontSize:
-                                18,
-                            fontWeight:
-                                FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height:
-                              10,
-                        ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<
-                              Color
-                            >(
-                              Colors.purple,
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (
-                                      context,
-                                    ) =>
-                                        BMIScreen(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'Track now',
-                            style: TextStyle(
-                              color:
-                                  Colors.white,
-                              fontSize:
-                                  12,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Image.asset(
-                          'assets/Images/auraCareMainLogo.png',
-                          width:
-                              75,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height:
                     15,
-              ),
-              Container(
-                padding: const EdgeInsets.all(
-                  20,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    20,
                   ),
                   color:
                       Colors.red[100],
@@ -454,7 +508,7 @@ class _MenuState
                           CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Item 05",
+                          "Help Finder",
                           style: TextStyle(
                             fontSize:
                                 18,
@@ -464,7 +518,7 @@ class _MenuState
                         ),
                         const SizedBox(
                           height:
-                              10,
+                              5,
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
@@ -482,12 +536,12 @@ class _MenuState
                                     (
                                       context,
                                     ) =>
-                                        const BMIScreen(),
+                                        const WorkoutView2(),
                               ),
                             );
                           },
                           child: const Text(
-                            'Track now',
+                            'Find now',
                             style: TextStyle(
                               color:
                                   Colors.white,
@@ -501,7 +555,7 @@ class _MenuState
                     Column(
                       children: [
                         Image.asset(
-                          'assets/Images/auraCareMainLogo.png',
+                          'assets/Images/emergency.png',
                           width:
                               75,
                         ),
@@ -515,12 +569,19 @@ class _MenuState
                     15,
               ),
               Container(
-                padding: const EdgeInsets.all(
-                  20,
+                padding: const EdgeInsets.only(
+                  left:
+                      15,
+                  right:
+                      15,
+                  top:
+                      10,
+                  bottom:
+                      10,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    20,
+                    15,
                   ),
                   color:
                       Colors.brown[100],
@@ -536,7 +597,7 @@ class _MenuState
                           CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Name Generator",
+                          "Meal Planner",
                           style: TextStyle(
                             fontSize:
                                 18,
@@ -546,7 +607,7 @@ class _MenuState
                         ),
                         const SizedBox(
                           height:
-                              10,
+                              5,
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
@@ -564,12 +625,12 @@ class _MenuState
                                     (
                                       context,
                                     ) =>
-                                        const BMIScreen(),
+                                        const WorkoutView2(),
                               ),
                             );
                           },
                           child: const Text(
-                            'Generate now',
+                            'Make now',
                             style: TextStyle(
                               color:
                                   Colors.white,
@@ -583,15 +644,16 @@ class _MenuState
                     Column(
                       children: [
                         Image.asset(
-                          'assets/Images/auraCareMainLogo.png',
+                          'assets/Images/meal.png',
                           width:
-                              100,
+                              75,
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
+
               SizedBox(
                 height:
                     15,

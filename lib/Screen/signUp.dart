@@ -269,7 +269,7 @@ class _SignUpState
               emailController,
           decoration: InputDecoration(
             hintText:
-                "Email",
+                "Your Email",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(
                 15,
