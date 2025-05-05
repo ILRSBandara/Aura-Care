@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers
 import 'package:aura_care/Screen/bmi.dart';
+import 'package:aura_care/Screen/ex1.dart';
 import 'package:flutter/material.dart';
 
 class HomePage2
@@ -24,7 +25,7 @@ class HomePage2
                 CrossAxisAlignment.start,
             children: [
               Text(
-                "Fullbody Workout",
+                "Fitness Courses",
                 style: TextStyle(
                   color:
                       Colors.black,
@@ -46,12 +47,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -81,7 +78,7 @@ class HomePage2
                               30,
                             ),
                             child: Image.asset(
-                              "assets/7.png",
+                              "assets/Images/7.png",
                               height:
                                   100,
                               width:
@@ -101,7 +98,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -111,12 +108,12 @@ class HomePage2
                         Padding(
                           padding: const EdgeInsets.only(
                             left:
-                                110.0,
+                                85.0,
                             bottom:
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -140,12 +137,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -160,7 +153,7 @@ class HomePage2
                               (
                                 context,
                               ) =>
-                                  BMIScreen(),
+                                  screen1(),
                         ),
                       );
                     },
@@ -176,7 +169,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/21.png",
+                                "assets/Images/21.png",
                                 height:
                                     200,
                                 width:
@@ -197,7 +190,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -207,12 +200,12 @@ class HomePage2
                         Padding(
                           padding: const EdgeInsets.only(
                             left:
-                                70,
+                                40,
                             bottom:
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -236,12 +229,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -272,7 +261,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/10.png",
+                                "assets/Images/10.png",
                                 height:
                                     100,
                                 width:
@@ -293,7 +282,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -303,12 +292,12 @@ class HomePage2
                         Padding(
                           padding: const EdgeInsets.only(
                             left:
-                                115.0,
+                                90.0,
                             bottom:
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -332,12 +321,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -368,7 +353,7 @@ class HomePage2
                                 40,
                               ),
                               child: Image.asset(
-                                "assets/8.png",
+                                "assets/Images/8.png",
                                 height:
                                     100,
                                 width:
@@ -389,7 +374,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -399,12 +384,12 @@ class HomePage2
                         Padding(
                           padding: const EdgeInsets.only(
                             left:
-                                130.0,
+                                100.0,
                             bottom:
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -428,12 +413,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -464,7 +445,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/11.png",
+                                "assets/Images/11.png",
                                 height:
                                     100,
                                 width:
@@ -485,7 +466,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -495,12 +476,12 @@ class HomePage2
                         Padding(
                           padding: const EdgeInsets.only(
                             left:
-                                95.0,
+                                60.0,
                             bottom:
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -524,12 +505,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -560,7 +537,7 @@ class HomePage2
                                 40,
                               ),
                               child: Image.asset(
-                                "assets/2.png",
+                                "assets/Images/2.png",
                                 height:
                                     100,
                                 width:
@@ -581,7 +558,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -591,12 +568,12 @@ class HomePage2
                         Padding(
                           padding: const EdgeInsets.only(
                             left:
-                                70.0,
+                                30.0,
                             bottom:
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -620,12 +597,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -656,7 +629,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/13.png",
+                                "assets/Images/13.png",
                                 height:
                                     100,
                                 width:
@@ -677,7 +650,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -692,7 +665,7 @@ class HomePage2
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -716,12 +689,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -752,7 +721,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/12.png",
+                                "assets/Images/12.png",
                                 height:
                                     100,
                                 width:
@@ -773,7 +742,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -788,7 +757,7 @@ class HomePage2
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -812,12 +781,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -848,7 +813,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/10.png",
+                                "assets/Images/10.png",
                                 height:
                                     100,
                                 width:
@@ -869,7 +834,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -884,7 +849,7 @@ class HomePage2
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:
@@ -908,12 +873,8 @@ class HomePage2
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(
-                        255,
-                        42,
-                        233,
-                        100,
-                      ),
+                      backgroundColor:
+                          Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           20,
@@ -944,7 +905,7 @@ class HomePage2
                                 20,
                               ),
                               child: Image.asset(
-                                "assets/17.png",
+                                "assets/Images/17.png",
                                 height:
                                     100,
                                 width:
@@ -965,7 +926,7 @@ class HomePage2
                                 fontWeight:
                                     FontWeight.bold,
                                 color:
-                                    Colors.white,
+                                    Colors.black,
                                 fontSize:
                                     17,
                               ),
@@ -980,7 +941,7 @@ class HomePage2
                                 20,
                           ),
                           child: Image.asset(
-                            "assets/4.webp",
+                            "assets/Images/4.webp",
                             height:
                                 30,
                             width:

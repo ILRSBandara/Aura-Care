@@ -46,7 +46,7 @@ class _DoctorListScreenState
       specialty:
           "Psychologists",
       imageAssetPath:
-          "assets/Images/doctor4.jpg",
+          "assets/Images/doctor44.jpg",
     ),
     Doctor(
       name:
@@ -54,7 +54,7 @@ class _DoctorListScreenState
       specialty:
           "Psychiatrists",
       imageAssetPath:
-          "assets/Images/doctor3.jpg",
+          "assets/Images/doctor33.jpg",
     ),
     Doctor(
       name:
@@ -62,7 +62,7 @@ class _DoctorListScreenState
       specialty:
           "Physicians",
       imageAssetPath:
-          "assets/Images/doctor5.jpg",
+          "assets/Images/doctor55.jpg",
     ),
     Doctor(
       name:
@@ -70,7 +70,7 @@ class _DoctorListScreenState
       specialty:
           "psychiatrists",
       imageAssetPath:
-          "assets/Images/doctor1.jpg",
+          "assets/Images/doctor11.jpg",
     ),
     Doctor(
       name:
@@ -78,7 +78,7 @@ class _DoctorListScreenState
       specialty:
           "Pediatric Psychiatrists",
       imageAssetPath:
-          "assets/Images/doctor6.jpg",
+          "assets/Images/doctor66.jpg",
     ),
     Doctor(
       name:
@@ -94,7 +94,7 @@ class _DoctorListScreenState
       specialty:
           "Online directories",
       imageAssetPath:
-          "assets/Images/doctor3.jpg",
+          "assets/Images/doctor33.jpg",
     ),
     Doctor(
       name:
@@ -102,7 +102,7 @@ class _DoctorListScreenState
       specialty:
           "Psychiatric-Mental Health Nurse Practitioners (PMHNP)",
       imageAssetPath:
-          "assets/Images/doctor1.jpg",
+          "assets/Images/doctor11.jpg",
     ),
     // Add other doctors...
   ];

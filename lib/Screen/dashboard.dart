@@ -45,9 +45,10 @@ class _DashboardScreenState
       Widget
     >[
       HomePage(), // index 0
-      Menu(
-        email:
-            widget.emaill,
+      Center(
+        child: Text(
+          'Reminder',
+        ),
       ),
       Center(
         child: Text(
