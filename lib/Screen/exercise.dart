@@ -1,6 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers
-import 'package:aura_care/Screen/bmi.dart';
-import 'package:aura_care/Screen/ex1.dart';
+import 'package:aura_care/Screen/bmiTracker.dart';
+import 'package:aura_care/Screen/exercise_view_1.dart';
 import 'package:flutter/material.dart';
 
 class HomePage2

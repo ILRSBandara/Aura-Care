@@ -1,4 +1,4 @@
-import 'package:aura_care/Screen/bmi.dart';
+import 'package:aura_care/Screen/bmiTracker.dart';
 import 'package:aura_care/Screen/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
