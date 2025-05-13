@@ -1,29 +1,7 @@
-import 'package:aura_care/Screen/splash.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+// 
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-   return MaterialApp(
-    
-       debugShowCheckedModeBanner: false,
-       title: 'Aura Care',
-       home: SplashScreen(),
-     );
-  }
-}
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
@@ -38,3 +16,31 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+
+
+import 'package:aura_care/Screen/HomeScreen.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:aura_care/Screen/home.dart'; // Import HomeScreen
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Aura Care',
+      home: const HomeScreen(), // Set HomeScreen directly
+    );
+  }
+}
