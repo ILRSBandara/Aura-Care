@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
                 FirebaseAuth.instance.signOut().then((value) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => ChatPage()),
+                    MaterialPageRoute(builder: (context) => ChatBot()),
                   );
                 });
               },

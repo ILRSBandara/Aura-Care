@@ -2,7 +2,6 @@ import 'package:aura_care/Screen/bmiTracker.dart';
 import 'package:aura_care/Screen/doctorList.dart';
 import 'package:aura_care/Screen/exercise.dart';
 import 'package:aura_care/Screen/autoSlidingBanner.dart';
-import 'package:aura_care/Screen/workout/workout_view.dart';
 import 'package:aura_care/Screen/workout/workout_view_2.dart';
 import 'package:flutter/material.dart';
 
