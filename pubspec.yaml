@@ -18,6 +18,11 @@ dependencies:
   firebase_auth: ^5.5.2
   carousel_slider: ^5.0.0
   flutter_rating_bar: ^4.0.1
+  http: ^0.13.6
+  flutter_dotenv: ^5.1.0
+  intl: ^0.20.2
+  google_generative_ai: ^0.0.1-dev
+  gradient_borders: ^1.0.1
 
 dev_dependencies:
   flutter_test:
