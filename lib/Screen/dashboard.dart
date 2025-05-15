@@ -1,9 +1,9 @@
-import 'package:aura_care/Screen/home.dart';
+import 'package:aura_care/Screen/main/home.dart';
 import 'package:aura_care/Screen/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'chatBot/chatPage.dart';
+import 'main/chatBot.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String emaill;
@@ -22,9 +22,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _pages = <Widget>[
-      HomePage(), // index 0
+      Home(), // index 0
       Center(child: Text('Reminder')),
-      ChatPage(),
+      ChatBot(),
       ProfileDisplayData(),
     ];
   }
@@ -50,7 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.punch_clock),
+            icon: Icon(Icons.alarm),
             label: 'Reminder',
             backgroundColor: Colors.white,
           ),

@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class ChatPage extends StatefulWidget {
+class ChatBot extends StatefulWidget {
   static const routeName = '/chat';
-  const ChatPage({super.key});
+  const ChatBot({super.key});
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatBot> createState() => _ChatBotState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatBotState extends State<ChatBot> {
   final TextEditingController _chatController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   List<Map<String, dynamic>> _chatHistory = [];
