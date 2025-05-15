@@ -1,3 +1,4 @@
+import 'package:aura_care/Screen/chatBot/geminiChatBot.dart';
 import 'package:aura_care/Screen/home.dart';
 import 'package:aura_care/Screen/menu.dart';
 import 'package:aura_care/Screen/profile.dart';
@@ -50,11 +51,7 @@ class _DashboardScreenState
           'Reminder',
         ),
       ),
-      Center(
-        child: Text(
-          'Chatbot',
-        ),
-      ),
+      //GeminiChatBot(),
       ProfileDisplayData(),
     ];
   }
