@@ -1,3 +1,4 @@
+import 'package:aura_care/Screen/main/healthReminder.dart';
 import 'package:aura_care/Screen/main/home.dart';
 import 'package:aura_care/Screen/profile.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     _pages = <Widget>[
       Home(), // index 0
-      Center(child: Text('Reminder')),
+      HealthReminder(),
       ChatBot(),
       ProfileDisplayData(),
     ];

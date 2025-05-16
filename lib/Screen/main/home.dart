@@ -1,4 +1,5 @@
 import 'package:aura_care/Screen/bmiTracker.dart';
+import 'package:aura_care/Screen/doctorList.dart';
 import 'package:aura_care/Screen/main/chatBot.dart';
 import 'package:aura_care/Screen/login.dart';
 import 'package:aura_care/Screen/main/menu.dart';
@@ -95,7 +96,7 @@ class _HomeState extends State<Home> {
                 FirebaseAuth.instance.signOut().then((value) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => ChatBot()),
+                    MaterialPageRoute(builder: (context) => BMIScreen()),
                   );
                 });
               },
@@ -104,7 +105,14 @@ class _HomeState extends State<Home> {
             ),
 
             ListTile(
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => DoctorListScreen()),
+                  );
+                });
+              },
               title: Text('Doctor Gallery'),
               leading: Icon(Icons.medical_services),
             ),

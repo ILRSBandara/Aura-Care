@@ -2,12 +2,9 @@ import 'package:aura_care/Screen/doctorProfile.dart';
 import 'package:flutter/material.dart';
 
 class Doctor {
-  final String
-  name;
-  final String
-  specialty;
-  final String
-  imageAssetPath; // Local image path
+  final String name;
+  final String specialty;
+  final String imageAssetPath; // Local image path
 
   Doctor({
     required this.name,
@@ -16,191 +13,110 @@ class Doctor {
   });
 }
 
-class DoctorListScreen
-    extends
-        StatefulWidget {
-  const DoctorListScreen({
-    super.key,
-  });
+class DoctorListScreen extends StatefulWidget {
+  const DoctorListScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _DoctorListScreenState
-  createState() =>
-      _DoctorListScreenState();
+  _DoctorListScreenState createState() => _DoctorListScreenState();
 }
 
-class _DoctorListScreenState
-    extends
-        State<
-          DoctorListScreen
-        > {
+class _DoctorListScreenState extends State<DoctorListScreen> {
   // Sample doctor data with local images
-  final List<
-    Doctor
-  >
-  doctors = [
+  final List<Doctor> doctors = [
     Doctor(
-      name:
-          "Dr. Vardh Shaneru",
-      specialty:
-          "Psychologists",
-      imageAssetPath:
-          "assets/Images/doctor44.jpg",
+      name: "Dr. Vardh Shaneru",
+      specialty: "Psychologists",
+      imageAssetPath: "assets/Images/doctor04.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Senuka Wathsal",
-      specialty:
-          "Psychiatrists",
-      imageAssetPath:
-          "assets/Images/doctor33.jpg",
+      name: "Dr. Senuka Wathsal",
+      specialty: "Psychiatrists",
+      imageAssetPath: "assets/Images/doctor03.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Kiyan Sadesh",
-      specialty:
-          "Physicians",
-      imageAssetPath:
-          "assets/Images/doctor55.jpg",
+      name: "Dr. Kiyan Sadesh",
+      specialty: "Physicians",
+      imageAssetPath: "assets/Images/doctor05.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Arashi Perera",
-      specialty:
-          "psychiatrists",
-      imageAssetPath:
-          "assets/Images/doctor11.jpg",
+      name: "Dr. Arashi Perera",
+      specialty: "psychiatrists",
+      imageAssetPath: "assets/Images/doctor01.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Thomas Nikol",
-      specialty:
-          "Pediatric Psychiatrists",
-      imageAssetPath:
-          "assets/Images/doctor66.jpg",
+      name: "Dr. Thomas Nikol",
+      specialty: "Pediatric Psychiatrists",
+      imageAssetPath: "assets/Images/doctor06.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Shevon Dias",
-      specialty:
-          "Psychopharmacologists",
-      imageAssetPath:
-          "assets/Images/gounder.jpg",
+      name: "Dr. Shevon Dias",
+      specialty: "Psychopharmacologists",
+      imageAssetPath: "assets/Images/doctor07.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Mensah T",
-      specialty:
-          "Online directories",
-      imageAssetPath:
-          "assets/Images/doctor33.jpg",
+      name: "Dr. Mensah T",
+      specialty: "Online directories",
+      imageAssetPath: "assets/Images/doctor03.jpg",
     ),
     Doctor(
-      name:
-          "Dr. Prakash Soyza",
-      specialty:
-          "Psychiatric-Mental Health Nurse Practitioners (PMHNP)",
-      imageAssetPath:
-          "assets/Images/doctor11.jpg",
+      name: "Dr. Prakash Soyza",
+      specialty: "Psychiatric-Mental",
+      imageAssetPath: "assets/Images/doctor01.jpg",
     ),
     // Add other doctors...
   ];
 
-  List<
-    Doctor
-  >
-  filteredDoctors =
-      [];
+  List<Doctor> filteredDoctors = [];
 
   @override
-  void
-  initState() {
-    super
-        .initState();
-    filteredDoctors =
-        doctors;
+  void initState() {
+    super.initState();
+    filteredDoctors = doctors;
   }
 
   // Function to filter doctors based on search input
-  void
-  filterDoctors(
-    String
-    query,
-  ) {
+  void filterDoctors(String query) {
     setState(() {
       filteredDoctors =
-          doctors.where((
-            doctor,
-          ) {
-            return doctor.name.toLowerCase().contains(
-                  query.toLowerCase(),
-                ) ||
-                doctor.specialty.toLowerCase().contains(
-                  query.toLowerCase(),
-                );
+          doctors.where((doctor) {
+            return doctor.name.toLowerCase().contains(query.toLowerCase()) ||
+                doctor.specialty.toLowerCase().contains(query.toLowerCase());
           }).toList();
     });
   }
 
   @override
-  Widget
-  build(
-    BuildContext
-    context,
-  ) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Doctors',
-        ),
-      ),
+      appBar: AppBar(title: const Text('Doctors')),
       body: Padding(
-        padding: const EdgeInsets.all(
-          16.0,
-        ),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             // Search Bar
             TextField(
-              onChanged:
-                  filterDoctors,
+              onChanged: filterDoctors,
               decoration: InputDecoration(
-                hintText:
-                    'Search for doctors...',
-                prefixIcon: Icon(
-                  Icons.search,
-                ),
+                hintText: 'Search for doctors...',
+                prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    8,
-                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ),
-            SizedBox(
-              height:
-                  16,
-            ),
+            SizedBox(height: 16),
             // Doctor List
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:
-                      2,
-                  crossAxisSpacing:
-                      16,
-                  mainAxisSpacing:
-                      16,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
                 ),
-                itemCount:
-                    filteredDoctors.length,
-                itemBuilder: (
-                  context,
-                  index,
-                ) {
-                  final doctor =
-                      filteredDoctors[index];
+                itemCount: filteredDoctors.length,
+                itemBuilder: (context, index) {
+                  final doctor = filteredDoctors[index];
                   return GestureDetector(
                     onTap: () {
                       // Navigate to the doctor's profile screen
@@ -208,61 +124,36 @@ class _DoctorListScreenState
                         context,
                         MaterialPageRoute(
                           builder:
-                              (
-                                context,
-                              ) => DoctorProfileScreen(
-                                doctor:
-                                    doctor,
-                              ),
+                              (context) => DoctorProfileScreen(doctor: doctor),
                         ),
                       );
                     },
                     child: Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          16,
-                        ),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      elevation:
-                          4,
+                      elevation: 4,
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ClipOval(
                             child: Image.asset(
                               doctor.imageAssetPath, // Load local image
-                              width:
-                                  80,
-                              height:
-                                  80,
-                              fit:
-                                  BoxFit.cover,
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          SizedBox(
-                            height:
-                                8,
-                          ),
+                          SizedBox(height: 8),
                           Text(
                             doctor.name,
-                            textAlign:
-                                TextAlign.center,
-                            style: TextStyle(
-                              fontWeight:
-                                  FontWeight.bold,
-                            ),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             doctor.specialty,
-                            textAlign:
-                                TextAlign.center,
-                            style: TextStyle(
-                              fontSize:
-                                  14,
-                              color:
-                                  Colors.blue,
-                            ),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 14, color: Colors.blue),
                           ),
                         ],
                       ),
