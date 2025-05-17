@@ -1,11 +1,9 @@
 import 'package:aura_care/Screen/bmiTracker.dart';
 import 'package:aura_care/Screen/doctorList.dart';
-import 'package:aura_care/Screen/main/chatBot.dart';
-import 'package:aura_care/Screen/login.dart';
+import 'package:aura_care/Screen/authentication/signIn.dart';
 import 'package:aura_care/Screen/main/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -132,7 +130,7 @@ class _HomeState extends State<Home> {
                 FirebaseAuth.instance.signOut().then((value) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LogIn()),
+                    MaterialPageRoute(builder: (context) => SignIn()),
                   );
                 });
               },

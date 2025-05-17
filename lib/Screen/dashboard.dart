@@ -4,7 +4,7 @@ import 'package:aura_care/Screen/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'main/chatBot.dart';
+import 'chatBot.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String emaill;
