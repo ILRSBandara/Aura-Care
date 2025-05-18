@@ -9,11 +9,11 @@ class StoreData {
     required String number,
     required String address,
     required String email,
-    required String weight, 
+    required String weight,
   }) async {
     try {
       if (age.isNotEmpty && nname.isNotEmpty) {
-        await _firestore.collection('user_details').add({
+        await _firestore.collection('UserDetails').add({
           'email': email,
           'age': age,
           'name': nname,

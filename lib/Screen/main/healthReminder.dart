@@ -69,7 +69,7 @@ class _HealthReminderState extends State<HealthReminder> {
                   ) {
                     return [
                       Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 8),
+                        padding: EdgeInsets.only(top: 16, bottom: 8),
                         child: Text(
                           entry.key,
                           style: TextStyle(
@@ -109,11 +109,7 @@ class _HealthReminderState extends State<HealthReminder> {
                 return ReminderItem(
                   title: data['title'] ?? '',
                   time: data['time'] ?? '',
-                  icon: IconData(
-                    data['iconCodePoint'] ?? Icons.notifications.codePoint,
-                    fontFamily: data['iconFontFamily'] ?? 'MaterialIcons',
-                    fontPackage: data['iconFontPackage'],
-                  ),
+                  icon: _iconDataFromName(data['iconName'] ?? 'notifications'),
                   color: Color(data['colorValue'] ?? Colors.blue.value),
                   isToday: data['isToday'] ?? true,
                   isActive: data['isActive'] ?? true,
@@ -126,17 +122,13 @@ class _HealthReminderState extends State<HealthReminder> {
     List<ReminderItem> reminders,
   ) {
     Map<String, List<ReminderItem>> grouped = {};
-
     for (var reminder in reminders) {
       String dateLabel = reminder.time.split(',').first.trim();
-
       if (!grouped.containsKey(dateLabel)) {
         grouped[dateLabel] = [];
       }
-
       grouped[dateLabel]!.add(reminder);
     }
-
     return grouped;
   }
 
@@ -278,9 +270,7 @@ class _HealthReminderState extends State<HealthReminder> {
                           initialTime: selectedTime,
                         );
                         if (picked != null) {
-                          setState(() {
-                            selectedTime = picked;
-                          });
+                          setState(() => selectedTime = picked);
                         }
                       },
                     ),
@@ -363,9 +353,7 @@ class _HealthReminderState extends State<HealthReminder> {
                     await userRemindersRef.add({
                       'title': titleController.text,
                       'time': timeString,
-                      'iconCodePoint': selectedIcon.codePoint,
-                      'iconFontFamily': selectedIcon.fontFamily,
-                      'iconFontPackage': selectedIcon.fontPackage,
+                      'iconName': _iconNameFromIconData(selectedIcon),
                       'colorValue': selectedColor.value,
                       'isToday': isToday,
                       'isActive': true,
@@ -384,8 +372,49 @@ class _HealthReminderState extends State<HealthReminder> {
       },
     );
   }
+
+  // === Helpers to store icon as string ===
+  String _iconNameFromIconData(IconData icon) {
+    if (icon == Icons.notifications) return 'notifications';
+    if (icon == Icons.medication) return 'medication';
+    if (icon == Icons.local_drink) return 'local_drink';
+    if (icon == Icons.directions_walk) return 'directions_walk';
+    if (icon == Icons.medical_services) return 'medical_services';
+    if (icon == Icons.favorite) return 'favorite';
+    if (icon == Icons.restaurant) return 'restaurant';
+    if (icon == Icons.fitness_center) return 'fitness_center';
+    if (icon == Icons.bedtime) return 'bedtime';
+    if (icon == Icons.monitor_weight) return 'monitor_weight';
+    return 'notifications';
+  }
+
+  IconData _iconDataFromName(String name) {
+    switch (name) {
+      case 'medication':
+        return Icons.medication;
+      case 'local_drink':
+        return Icons.local_drink;
+      case 'directions_walk':
+        return Icons.directions_walk;
+      case 'medical_services':
+        return Icons.medical_services;
+      case 'favorite':
+        return Icons.favorite;
+      case 'restaurant':
+        return Icons.restaurant;
+      case 'fitness_center':
+        return Icons.fitness_center;
+      case 'bedtime':
+        return Icons.bedtime;
+      case 'monitor_weight':
+        return Icons.monitor_weight;
+      default:
+        return Icons.notifications;
+    }
+  }
 }
 
+// === Reminder Model ===
 class ReminderItem {
   final String title;
   final String time;

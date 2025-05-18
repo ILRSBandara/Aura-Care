@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyNumbersScreen extends StatefulWidget {
-  final String email;
+  final String helpEmail;
 
-  const EmergencyNumbersScreen({Key? key, required this.email})
-    : super(key: key);
+  const EmergencyNumbersScreen({super.key, required this.helpEmail});
 
   @override
   _EmergencyNumbersScreenState createState() => _EmergencyNumbersScreenState();
@@ -27,7 +26,7 @@ class _EmergencyNumbersScreenState extends State<EmergencyNumbersScreen> {
       await emergencyNumbers.add({
         'name': name,
         'number': number,
-        'email': widget.email,
+        'email': widget.helpEmail,
       });
       _nameController.clear();
       _numberController.clear();
@@ -120,7 +119,7 @@ class _EmergencyNumbersScreenState extends State<EmergencyNumbersScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream:
                     emergencyNumbers
-                        .where('email', isEqualTo: widget.email)
+                        .where('email', isEqualTo: widget.helpEmail)
                         .snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) return CircularProgressIndicator();

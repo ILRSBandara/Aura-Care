@@ -104,7 +104,7 @@ class _MenuState extends State<Menu> {
                     ),
                     Column(
                       children: [
-                        Image.asset('assets/Images/health.png', width: 83),
+                        Image.asset('assets/Images/meal.png', width: 83),
                       ],
                     ),
                   ],
@@ -318,7 +318,7 @@ class _MenuState extends State<Menu> {
                               MaterialPageRoute(
                                 builder:
                                     (context) => EmergencyNumbersScreen(
-                                      email: widget.email,
+                                      helpEmail: widget.email,
                                     ),
                               ),
                             );
@@ -381,7 +381,7 @@ class _MenuState extends State<Menu> {
                     ),
                     Column(
                       children: [
-                        Image.asset('assets/Images/meal.png', width: 75),
+                        Image.asset('assets/Images/health.png', width: 75),
                       ],
                     ),
                   ],
