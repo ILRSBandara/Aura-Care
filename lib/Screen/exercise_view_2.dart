@@ -2,97 +2,46 @@ import 'package:aura_care/Screen/common_widget/tab_button.dart';
 import 'package:aura_care/Screen/workout/workout_detail_view.dart';
 import 'package:flutter/material.dart';
 
-class ExerciseView2
-    extends
-        StatefulWidget {
-  const ExerciseView2({
-    super.key,
-  });
+class ExerciseView2 extends StatefulWidget {
+  const ExerciseView2({super.key});
 
   @override
-  State<
-    ExerciseView2
-  >
-  createState() =>
-      _ExerciseView2State();
+  State<ExerciseView2> createState() => _ExerciseView2State();
 }
 
-class _ExerciseView2State
-    extends
-        State<
-          ExerciseView2
-        > {
-  int
-  isActiveTab =
-      0;
-  List
-  workArr = [
-    {
-      "name":
-          "Push-Up",
-      "image":
-          "assets/img/1.png",
-    },
-    {
-      "name":
-          "Leg extenstion",
-      "image":
-          "assets/img/2.png",
-    },
-    {
-      "name":
-          "Push-Up",
-      "image":
-          "assets/img/5.png",
-    },
-    {
-      "name":
-          "Climber",
-      "image":
-          "assets/img/3.png",
-    },
+class _ExerciseView2State extends State<ExerciseView2> {
+  int isActiveTab = 0;
+  List workArr = [
+    {"name": "Push-Up", "image": "assets/img/1.png"},
+    {"name": "Leg extenstion", "image": "assets/img/2.png"},
+    {"name": "Push-Up", "image": "assets/img/5.png"},
+    {"name": "Climber", "image": "assets/img/3.png"},
   ];
 
   @override
-  Widget
-  build(
-    BuildContext
-    context,
-  ) {
-    var media = MediaQuery.sizeOf(
-      context,
-    );
+  Widget build(BuildContext context) {
+    var media = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            Colors.blue,
-        centerTitle:
-            true,
-        elevation:
-            0,
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(
-              context,
-            );
+            Navigator.pop(context);
           },
           icon: Image.asset(
             "assets/img/black_white.png",
-            width:
-                25,
-            height:
-                25,
+            width: 25,
+            height: 25,
           ),
         ),
         title: Text(
           "Exercise",
           style: TextStyle(
-            color:
-                Colors.white,
-            fontSize:
-                20,
-            fontWeight:
-                FontWeight.w700,
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -100,96 +49,62 @@ class _ExerciseView2State
         children: [
           Container(
             decoration: BoxDecoration(
-              color:
-                  Colors.white,
+              color: Colors.white,
               boxShadow: const [
                 BoxShadow(
-                  color:
-                      Colors.black26,
-                  blurRadius:
-                      4,
-                  offset: Offset(
-                    0,
-                    2,
-                  ),
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: Offset(0, 2),
                 ),
               ],
             ),
             child: Row(
               children: [
                 Expanded(
-                  flex:
-                      3,
+                  flex: 3,
                   child: TabButton2(
-                    title:
-                        "Full Body",
-                    isActive:
-                        isActiveTab ==
-                        0,
+                    title: "Full Body",
+                    isActive: isActiveTab == 0,
                     onPressed: () {
-                      setState(
-                        () {
-                          isActiveTab =
-                              0;
-                        },
-                      );
+                      setState(() {
+                        isActiveTab = 0;
+                      });
                     },
                   ),
                 ),
                 Expanded(
-                  flex:
-                      2,
+                  flex: 2,
                   child: TabButton2(
-                    title:
-                        "Foot",
-                    isActive:
-                        isActiveTab ==
-                        1,
+                    title: "Foot",
+                    isActive: isActiveTab == 1,
                     onPressed: () {
-                      setState(
-                        () {
-                          isActiveTab =
-                              1;
-                        },
-                      );
+                      setState(() {
+                        isActiveTab = 1;
+                      });
                     },
                   ),
                 ),
                 Expanded(
-                  flex:
-                      2,
+                  flex: 2,
                   child: TabButton2(
-                    title:
-                        "Arm",
-                    isActive:
-                        isActiveTab ==
-                        2,
+                    title: "Arm",
+                    isActive: isActiveTab == 2,
                     onPressed: () {
-                      setState(
-                        () {
-                          isActiveTab =
-                              2;
-                        },
-                      );
+                      setState(() {
+                        isActiveTab = 2;
+                      });
                     },
                   ),
                 ),
                 Expanded(
-                  flex:
-                      2,
+                  flex: 2,
                   child: TabButton2(
-                    title:
-                        "Body",
-                    isActive:
-                        isActiveTab ==
-                        3,
+                    title: "Body",
+                    isActive: isActiveTab == 3,
                     onPressed: () {
-                      setState(
-                        () {
-                          isActiveTab =
-                              3;
-                        },
-                      );
+                      setState(() {
+                        isActiveTab = 3;
+                      });
                     },
                   ),
                 ),
@@ -198,80 +113,51 @@ class _ExerciseView2State
           ),
           Expanded(
             child: ListView.builder(
-              padding:
-                  EdgeInsets.zero,
-              itemCount:
-                  workArr.length,
-              itemBuilder: (
-                context,
-                index,
-              ) {
-                var wObj =
-                    workArr[index]
-                        as Map? ??
-                    {};
+              padding: EdgeInsets.zero,
+              itemCount: workArr.length,
+              itemBuilder: (context, index) {
+                var wObj = workArr[index] as Map? ?? {};
                 return Container(
-                  decoration: BoxDecoration(
-                    color:
-                        Colors.white,
-                  ),
+                  decoration: BoxDecoration(color: Colors.white),
                   child: Column(
                     children: [
                       Stack(
-                        alignment:
-                            Alignment.center,
+                        alignment: Alignment.center,
                         children: [
                           Image.asset(
                             wObj["image"].toString(),
-                            width:
-                                media.width,
-                            height:
-                                media.width *
-                                0.55,
-                            fit:
-                                BoxFit.cover,
+                            width: media.width,
+                            height: media.width * 0.55,
+                            fit: BoxFit.cover,
                           ),
                           Container(
-                            width:
-                                media.width,
-                            height:
-                                media.width *
-                                0.55,
+                            width: media.width,
+                            height: media.width * 0.55,
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(
-                                0.5,
-                              ),
+                              color: Colors.black.withOpacity(0.5),
                             ),
                           ),
                           Image.asset(
                             "assets/img/play.png",
-                            width:
-                                60,
-                            height:
-                                60,
+                            width: 60,
+                            height: 60,
                           ),
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical:
-                              4,
-                          horizontal:
-                              20,
+                          vertical: 4,
+                          horizontal: 20,
                         ),
                         child: Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               wObj["name"],
                               style: TextStyle(
-                                color:
-                                    Colors.blue,
-                                fontSize:
-                                    20,
-                                fontWeight:
-                                    FontWeight.w700,
+                                color: Colors.blue,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                             IconButton(
@@ -280,19 +166,14 @@ class _ExerciseView2State
                                   context,
                                   MaterialPageRoute(
                                     builder:
-                                        (
-                                          context,
-                                        ) =>
-                                            const WorkoutDetailView(),
+                                        (context) => const WorkoutDetailView(),
                                   ),
                                 );
                               },
                               icon: Image.asset(
                                 "assets/img/more.png",
-                                width:
-                                    25,
-                                height:
-                                    25,
+                                width: 25,
+                                height: 25,
                               ),
                             ),
                           ],
@@ -307,70 +188,50 @@ class _ExerciseView2State
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        elevation:
-            1,
+        elevation: 1,
         child: Padding(
-          padding: const EdgeInsets.only(
-            top:
-                15,
-          ),
+          padding: const EdgeInsets.only(top: 15),
           child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap:
-                    () {},
+                onTap: () {},
                 child: Image.asset(
                   "assets/img/menu_running.png",
-                  width:
-                      25,
-                  height:
-                      25,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               InkWell(
-                onTap:
-                    () {},
+                onTap: () {},
                 child: Image.asset(
                   "assets/img/menu_meal_plan.png",
-                  width:
-                      25,
-                  height:
-                      25,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               InkWell(
-                onTap:
-                    () {},
+                onTap: () {},
                 child: Image.asset(
                   "assets/img/menu_home.png",
-                  width:
-                      25,
-                  height:
-                      25,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               InkWell(
-                onTap:
-                    () {},
+                onTap: () {},
                 child: Image.asset(
                   "assets/img/menu_weight.png",
-                  width:
-                      25,
-                  height:
-                      25,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               InkWell(
-                onTap:
-                    () {},
+                onTap: () {},
                 child: Image.asset(
                   "assets/img/more.png",
-                  width:
-                      25,
-                  height:
-                      25,
+                  width: 25,
+                  height: 25,
                 ),
               ),
             ],

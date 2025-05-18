@@ -1,49 +1,31 @@
 import 'package:flutter/material.dart';
 
-class HorizontalList
-    extends
-        StatelessWidget {
+class HorizontalList extends StatelessWidget {
   @override
-  Widget
-  build(
-    BuildContext
-    context,
-  ) {
+  Widget build(BuildContext context) {
     return Container(
-      height:
-          80.0,
+      height: 80.0,
       child: ListView(
-        scrollDirection:
-            Axis.horizontal,
-        children: <
-          Widget
-        >[
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
           Category(
-            image_location:
-                'assets/Images/bmi.png',
-            image_caption:
-                'Aaaaa',
+            image_location: 'assets/Images/bmi.png',
+            image_caption: 'Aaaaa',
           ),
 
           Category(
-            image_location:
-                'assets/Images/bmi.png',
-            image_caption:
-                'Aaaaa',
+            image_location: 'assets/Images/bmi.png',
+            image_caption: 'Aaaaa',
           ),
 
           Category(
-            image_location:
-                'assets/Images/bmi.png',
-            image_caption:
-                'Aaaaa',
+            image_location: 'assets/Images/bmi.png',
+            image_caption: 'Aaaaa',
           ),
 
           Category(
-            image_location:
-                'assets/Images/bmi.png',
-            image_caption:
-                'Aaaaa',
+            image_location: 'assets/Images/bmi.png',
+            image_caption: 'Aaaaa',
           ),
         ],
       ),
@@ -51,53 +33,25 @@ class HorizontalList
   }
 }
 
-class Category
-    extends
-        StatelessWidget {
-  final String
-  image_location;
-  final String
-  image_caption;
+class Category extends StatelessWidget {
+  final String image_location;
+  final String image_caption;
 
-  Category({
-    required this.image_location,
-    required this.image_caption,
-  });
+  Category({required this.image_location, required this.image_caption});
 
   @override
-  Widget
-  build(
-    BuildContext
-    context,
-  ) {
+  Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(
-        2.0,
-      ),
+      padding: const EdgeInsets.all(2.0),
       child: InkWell(
-        onTap:
-            () {},
+        onTap: () {},
         child: Container(
-          width:
-              80.0,
+          width: 80.0,
           child: ListTile(
-            title: Image.asset(
-              image_location,
-              width:
-                  40.0,
-              height:
-                  40.0,
-            ),
+            title: Image.asset(image_location, width: 40.0, height: 40.0),
             subtitle: Container(
-              alignment:
-                  Alignment.topCenter,
-              child: Text(
-                image_caption,
-                style: new TextStyle(
-                  fontSize:
-                      12.0,
-                ),
-              ),
+              alignment: Alignment.topCenter,
+              child: Text(image_caption, style: new TextStyle(fontSize: 12.0)),
             ),
           ),
         ),

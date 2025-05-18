@@ -1,10 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
 import 'package:page_transition/page_transition.dart';
-// ignore: depend_on_referenced_packages
 import 'package:swipeable_button_view/swipeable_button_view.dart';
-// ignore: depend_on_referenced_packages
 import 'package:pretty_gauge/pretty_gauge.dart';
 
 void main() {
@@ -13,14 +10,10 @@ void main() {
   );
 }
 
-///
-/// BMIScreen: The main screen for BMI calculation.
-///
 class BMIScreen extends StatefulWidget {
   const BMIScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _BMIScreenState createState() => _BMIScreenState();
 }
 
@@ -30,6 +23,7 @@ class _BMIScreenState extends State<BMIScreen> {
   int _weight = 50;
   bool _isFinished = false;
   double _bmiScore = 0;
+  String _gender = "Male";
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +38,41 @@ class _BMIScreenState extends State<BMIScreen> {
                 "BMI Calculator",
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 20),
-              Center(
-                child: Image.asset(
-                  'assets/Images/bmi.png', // make sure this asset exists in your project
-                  width: 180,
-                ),
+
+              Center(child: Image.asset('assets/Images/bmi.png', width: 180)),
+
+              // Gender Selection
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ChoiceChip(
+                    label: const Text("Male"),
+                    selected: _gender == "Male",
+                    onSelected: (selected) {
+                      setState(() {
+                        _gender = "Male";
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  ChoiceChip(
+                    label: const Text("Female"),
+                    selected: _gender == "Female",
+                    onSelected: (selected) {
+                      setState(() {
+                        _gender = "Female";
+                      });
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 20),
-              // Height selector
+              const SizedBox(height: 10),
               Height(
                 onChange: (heightVal) {
                   _height = heightVal;
                 },
               ),
-              const SizedBox(height: 15),
-              // Age and Weight selectors side by side
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,15 +98,17 @@ class _BMIScreenState extends State<BMIScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              // Swipeable Button to calculate BMI
               SwipeableButtonView(
                 isFinished: _isFinished,
                 onFinish: () async {
-                  // Navigate to Score Screen after calculating BMI.
                   await Navigator.push(
                     context,
                     PageTransition(
-                      child: ScoreScreen(bmiScore: _bmiScore, age: _age),
+                      child: ScoreScreen(
+                        bmiScore: _bmiScore,
+                        age: _age,
+                        gender: _gender,
+                      ),
                       type: PageTransitionType.fade,
                     ),
                   );
@@ -102,9 +117,7 @@ class _BMIScreenState extends State<BMIScreen> {
                   });
                 },
                 onWaitingProcess: () {
-                  // Calculate BMI when waiting.
                   calculateBmi();
-
                   Future.delayed(const Duration(seconds: 1), () {
                     setState(() {
                       _isFinished = true;
@@ -126,14 +139,10 @@ class _BMIScreenState extends State<BMIScreen> {
   }
 
   void calculateBmi() {
-    // BMI = weight (kg) / [height (m)]²
     _bmiScore = _weight / pow(_height / 100, 2);
   }
 }
 
-///
-/// AgeWeight widget: A counter widget used for both Age and Weight.
-///
 class AgeWeight extends StatefulWidget {
   final Function(int) onChange;
   final String title;
@@ -151,7 +160,6 @@ class AgeWeight extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _AgeWeightState createState() => _AgeWeightState();
 }
 
@@ -236,16 +244,12 @@ class _AgeWeightState extends State<AgeWeight> {
   }
 }
 
-///
-/// Height widget: Displays a slider for selecting height.
-///
 class Height extends StatefulWidget {
   final Function(int) onChange;
 
   const Height({super.key, required this.onChange});
 
   @override
-  // ignore: library_private_types_in_public_api
   _HeightState createState() => _HeightState();
 }
 
@@ -301,14 +305,17 @@ class _HeightState extends State<Height> {
   }
 }
 
-///
-/// ScoreScreen: Displays the BMI score along with an interpretation.
-///
 class ScoreScreen extends StatefulWidget {
   final double bmiScore;
   final int age;
+  final String gender;
 
-  const ScoreScreen({super.key, required this.bmiScore, required this.age});
+  const ScoreScreen({
+    super.key,
+    required this.bmiScore,
+    required this.age,
+    required this.gender,
+  });
 
   @override
   State<ScoreScreen> createState() => _ScoreScreenState();
@@ -325,88 +332,96 @@ class _ScoreScreenState extends State<ScoreScreen> {
     setBmiInterpretation();
   }
 
+  void setBmiInterpretation() {
+    if (widget.bmiScore > 30) {
+      bmiStatus = "Obese";
+      bmiInterpretation =
+          widget.gender == "Male"
+              ? "Sir, please work to reduce obesity."
+              : "Ma'am, please work to reduce obesity.";
+      bmiStatusColor = Colors.pink;
+    } else if (widget.bmiScore >= 25) {
+      bmiStatus = "Overweight";
+      bmiInterpretation =
+          widget.gender == "Male"
+              ? "Sir, do regular exercise and reduce the weight."
+              : "Ma'am, do regular exercise and reduce the weight.";
+      bmiStatusColor = Colors.orange;
+    } else if (widget.bmiScore >= 18.5) {
+      bmiStatus = "NORMAL";
+      bmiInterpretation =
+          widget.gender == "Male" ? "Great shape, Sir!" : "Great shape, Ma'am!";
+      bmiStatusColor = Colors.blue;
+    } else {
+      bmiStatus = "Underweight";
+      bmiInterpretation =
+          widget.gender == "Male"
+              ? "Sir, try to increase your weight."
+              : "Ma'am, try to increase your weight.";
+      bmiStatusColor = Colors.red;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-        child: Column(
-          children: [
-            const Text(
-              "Your Score",
-              style: TextStyle(
-                fontSize: 40,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            PrettyGauge(
-              gaugeSize: 310,
-              minValue: 0,
-              maxValue: 40,
-              segments: [
-                GaugeSegment('UnderWeight', 18.5, Colors.red),
-                GaugeSegment('Normal', 6.4, Colors.blue),
-                GaugeSegment('OverWeight', 5, Colors.orange),
-                GaugeSegment('Obese', 10.1, Colors.pink),
-              ],
-              valueWidget: Text(
-                widget.bmiScore.toStringAsFixed(1),
-                style: const TextStyle(fontSize: 40),
-              ),
-              currentValue: widget.bmiScore,
-              needleColor: Colors.blue,
-            ),
-            Text(
-              bmiStatus!,
-              style: TextStyle(fontSize: 50, color: bmiStatusColor!),
-            ),
-            const SizedBox(height: 10),
-            Text(bmiInterpretation!, style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 250,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 114, 213, 200),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Re-calculate"),
-                  ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "Your Score",
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              const SizedBox(height: 10),
+              PrettyGauge(
+                gaugeSize: 310,
+                minValue: 0,
+                maxValue: 40,
+                segments: [
+                  GaugeSegment('UnderWeight', 18.5, Colors.red),
+                  GaugeSegment('Normal', 6.4, Colors.blue),
+                  GaugeSegment('OverWeight', 5, Colors.orange),
+                  GaugeSegment('Obese', 10.1, Colors.pink),
+                ],
+                valueWidget: Text(
+                  widget.bmiScore.toStringAsFixed(1),
+                  style: const TextStyle(fontSize: 40),
+                ),
+                currentValue: widget.bmiScore,
+                needleColor: Colors.blue,
+              ),
+              Text(
+                bmiStatus!,
+                style: TextStyle(fontSize: 50, color: bmiStatusColor!),
+              ),
+              const SizedBox(height: 10),
+              Text(bmiInterpretation!, style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 30),
+              Container(
+                width: 250,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 114, 213, 200),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Re-calculate"),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-  }
-
-  void setBmiInterpretation() {
-    if (widget.bmiScore > 30) {
-      bmiStatus = "Obese";
-      bmiInterpretation = "Please work to reduce obesity";
-      bmiStatusColor = Colors.pink;
-    } else if (widget.bmiScore >= 25) {
-      bmiStatus = "Overweight";
-      bmiInterpretation = "Do regular exercise & reduce the weight";
-      bmiStatusColor = Colors.orange;
-    } else if (widget.bmiScore >= 18.5) {
-      bmiStatus = "NORMAL";
-      bmiInterpretation = "Have fun you are in great shape!";
-      bmiStatusColor = Colors.blue;
-    } else if (widget.bmiScore < 18.5) {
-      bmiStatus = "Underweight";
-      bmiInterpretation = "Try to increase the weight";
-      bmiStatusColor = Colors.red;
-    }
   }
 }

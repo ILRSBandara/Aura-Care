@@ -1,7 +1,8 @@
 import 'package:aura_care/Screen/bmiTracker.dart';
 import 'package:aura_care/Screen/doctorList.dart';
-import 'package:aura_care/Screen/exercise.dart';
+import 'package:aura_care/Screen/fitness_courses/fitnessCourses.dart';
 import 'package:aura_care/Screen/autoSlidingBanner.dart';
+import 'package:aura_care/Screen/meal_planner/DailyCalorieCalculator.dart';
 import 'package:aura_care/Screen/workout/workout_view_2.dart';
 import 'package:flutter/material.dart';
 
@@ -145,7 +146,7 @@ class _MenuState extends State<Menu> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage2(),
+                                builder: (context) => FitnessCourses(),
                               ),
                             );
                           },
@@ -370,7 +371,8 @@ class _MenuState extends State<Menu> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const WorkoutView2(),
+                                builder:
+                                    (context) => const DailyCalorieCalculator(),
                               ),
                             );
                           },

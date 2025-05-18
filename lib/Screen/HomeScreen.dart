@@ -1,5 +1,5 @@
-import 'package:aura_care/Screen/DailyCalorieCalculator.dart';
-import 'package:aura_care/Screen/mealCard.dart';
+import 'package:aura_care/Screen/meal_planner/dailyCalorieCalculator.dart';
+import 'package:aura_care/Screen/meal_planner/mealCard.dart';
 import 'package:flutter/material.dart';
 import 'build_meal.dart'; // Import your BuildMealScreen
 
