@@ -1,119 +1,143 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Add this package to your pubspec.yaml
+import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HealthReminder extends StatefulWidget {
-  const HealthReminder({super.key});
+  final String userEmail;
+
+  const HealthReminder({super.key, required this.userEmail});
 
   @override
-  // ignore: library_private_types_in_public_api
   _HealthReminderState createState() => _HealthReminderState();
 }
 
 class _HealthReminderState extends State<HealthReminder> {
-  // List to store reminders
-  List<ReminderItem> reminders = [
-    ReminderItem(
-      title: 'Take Medication',
-      time: '8:00 AM',
-      icon: Icons.medication,
-      color: Colors.blue,
-      isToday: true,
-    ),
-    ReminderItem(
-      title: 'Drink Water',
-      time: '10:00 AM',
-      icon: Icons.local_drink,
-      color: Colors.lightBlue,
-      isToday: true,
-    ),
-    ReminderItem(
-      title: 'Take a Walk',
-      time: '5:30 PM',
-      icon: Icons.directions_walk,
-      color: Colors.green,
-      isToday: true,
-    ),
-    ReminderItem(
-      title: 'Doctor Appointment',
-      time: 'Tomorrow, 2:30 PM',
-      icon: Icons.medical_services,
-      color: Colors.orange,
-      isToday: false,
-    ),
-    ReminderItem(
-      title: 'Blood Pressure Check',
-      time: 'May 11, 9:00 AM',
-      icon: Icons.favorite,
-      color: Colors.red,
-      isToday: false,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    // Separate today's reminders from upcoming ones
-    List<ReminderItem> todayReminders =
-        reminders.where((item) => item.isToday).toList();
-    List<ReminderItem> upcomingReminders =
-        reminders.where((item) => !item.isToday).toList();
-
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text('Health Reminders')),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Today's Reminders Section
-            _buildSectionTitle('Today\'s Reminders'),
-            if (todayReminders.isEmpty)
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Center(child: Text('No reminders for today')),
-              ),
-            ...todayReminders.map((reminder) => _buildReminderCard(reminder)),
+      body: StreamBuilder<List<ReminderItem>>(
+        stream: reminderStream(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
 
-            SizedBox(height: 20),
-
-            // Upcoming Reminders Section
-            _buildSectionTitle('Upcoming'),
-            if (upcomingReminders.isEmpty)
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Center(child: Text('No upcoming reminders')),
-              ),
-            ...upcomingReminders.map(
-              (reminder) => _buildReminderCard(reminder),
-            ),
-
-            SizedBox(height: 20),
-
-            // Add Reminder Button
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _showAddReminderDialog(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
-                    const Color.fromARGB(255, 74, 239, 126),
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('No reminders found'),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () => _showAddReminderDialog(context),
+                    child: Text('Add First Reminder'),
                   ),
-                  padding: WidgetStateProperty.all<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                ],
+              ),
+            );
+          }
+
+          final reminders = snapshot.data!;
+          final todayReminders = reminders.where((r) => r.isToday).toList();
+          final upcomingReminders = reminders.where((r) => !r.isToday).toList();
+
+          return SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSectionTitle('Today\'s Reminders'),
+                if (todayReminders.isEmpty)
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Center(child: Text('No reminders for today')),
                   ),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
+                ...todayReminders.map(_buildReminderCard),
+                SizedBox(height: 20),
+                _buildSectionTitle('Upcoming Reminders'),
+                if (upcomingReminders.isEmpty)
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Center(child: Text('No upcoming reminders')),
+                  )
+                else
+                  ..._groupRemindersByDate(upcomingReminders).entries.expand((
+                    entry,
+                  ) {
+                    return [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16, bottom: 8),
+                        child: Text(
+                          entry.key,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      ...entry.value.map(_buildReminderCard),
+                    ];
+                  }),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () => _showAddReminderDialog(context),
+                    child: Text('Add New Reminder'),
                   ),
                 ),
-                child: Text('Add New Reminder', style: TextStyle(fontSize: 16)),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
+  }
+
+  Stream<List<ReminderItem>> reminderStream() {
+    return FirebaseFirestore.instance
+        .collection('user_reminders')
+        .doc(widget.userEmail)
+        .collection('reminders')
+        .orderBy('title')
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                final data = doc.data();
+                return ReminderItem(
+                  title: data['title'] ?? '',
+                  time: data['time'] ?? '',
+                  icon: IconData(
+                    data['iconCodePoint'] ?? Icons.notifications.codePoint,
+                    fontFamily: data['iconFontFamily'] ?? 'MaterialIcons',
+                    fontPackage: data['iconFontPackage'],
+                  ),
+                  color: Color(data['colorValue'] ?? Colors.blue.value),
+                  isToday: data['isToday'] ?? true,
+                  isActive: data['isActive'] ?? true,
+                );
+              }).toList(),
+        );
+  }
+
+  Map<String, List<ReminderItem>> _groupRemindersByDate(
+    List<ReminderItem> reminders,
+  ) {
+    Map<String, List<ReminderItem>> grouped = {};
+
+    for (var reminder in reminders) {
+      String dateLabel = reminder.time.split(',').first.trim();
+
+      if (!grouped.containsKey(dateLabel)) {
+        grouped[dateLabel] = [];
+      }
+
+      grouped[dateLabel]!.add(reminder);
+    }
+
+    return grouped;
   }
 
   Widget _buildSectionTitle(String title) {
@@ -134,7 +158,6 @@ class _HealthReminderState extends State<HealthReminder> {
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         leading: CircleAvatar(
-          // ignore: deprecated_member_use
           backgroundColor: reminder.color.withOpacity(0.2),
           child: Icon(reminder.icon, color: reminder.color),
         ),
@@ -145,12 +168,30 @@ class _HealthReminderState extends State<HealthReminder> {
         subtitle: Text(reminder.time),
         trailing: Switch(
           value: reminder.isActive,
-          onChanged: (value) {
-            setState(() {
-              reminder.isActive = value;
-            });
+          onChanged: (value) async {
+            final userRemindersRef = FirebaseFirestore.instance
+                .collection('user_reminders')
+                .doc(widget.userEmail)
+                .collection('reminders');
+
+            final query =
+                await userRemindersRef
+                    .where('title', isEqualTo: reminder.title)
+                    .where('time', isEqualTo: reminder.time)
+                    .get();
+
+            if (query.docs.isNotEmpty) {
+              final docId = query.docs.first.id;
+              if (value) {
+                // Switch turned ON — update isActive to true
+                await userRemindersRef.doc(docId).update({'isActive': true});
+              } else {
+                // Switch turned OFF — delete the reminder
+                await userRemindersRef.doc(docId).delete();
+              }
+            }
           },
-          activeColor: Colors.blue,
+          activeColor: Colors.green,
         ),
       ),
     );
@@ -164,7 +205,6 @@ class _HealthReminderState extends State<HealthReminder> {
     IconData selectedIcon = Icons.notifications;
     Color selectedColor = Colors.blue;
 
-    // List of available icons for reminders
     final List<IconData> availableIcons = [
       Icons.notifications,
       Icons.medication,
@@ -178,7 +218,6 @@ class _HealthReminderState extends State<HealthReminder> {
       Icons.monitor_weight,
     ];
 
-    // List of available colors for reminders
     final List<Color> availableColors = [
       Colors.blue,
       Colors.red,
@@ -209,8 +248,6 @@ class _HealthReminderState extends State<HealthReminder> {
                       ),
                     ),
                     SizedBox(height: 20),
-
-                    // Date selector
                     ListTile(
                       title: Text('Date'),
                       subtitle: Text(
@@ -218,7 +255,7 @@ class _HealthReminderState extends State<HealthReminder> {
                       ),
                       trailing: Icon(Icons.calendar_today),
                       onTap: () async {
-                        final DateTime? picked = await showDatePicker(
+                        final picked = await showDatePicker(
                           context: context,
                           initialDate: selectedDate,
                           firstDate: DateTime.now(),
@@ -228,21 +265,17 @@ class _HealthReminderState extends State<HealthReminder> {
                           setState(() {
                             selectedDate = picked;
                             isToday =
-                                selectedDate.day == DateTime.now().day &&
-                                selectedDate.month == DateTime.now().month &&
-                                selectedDate.year == DateTime.now().year;
+                                picked.difference(DateTime.now()).inDays == 0;
                           });
                         }
                       },
                     ),
-
-                    // Time selector
                     ListTile(
                       title: Text('Time'),
                       subtitle: Text(selectedTime.format(context)),
                       trailing: Icon(Icons.access_time),
                       onTap: () async {
-                        final TimeOfDay? picked = await showTimePicker(
+                        final picked = await showTimePicker(
                           context: context,
                           initialTime: selectedTime,
                         );
@@ -253,23 +286,15 @@ class _HealthReminderState extends State<HealthReminder> {
                         }
                       },
                     ),
-
                     SizedBox(height: 10),
-
-                    // Icon selector
                     Text('Select Icon', style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 10),
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
                       children:
                           availableIcons.map((icon) {
                             return GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedIcon = icon;
-                                });
-                              },
+                              onTap: () => setState(() => selectedIcon = icon),
                               child: CircleAvatar(
                                 backgroundColor:
                                     selectedIcon == icon
@@ -286,23 +311,16 @@ class _HealthReminderState extends State<HealthReminder> {
                             );
                           }).toList(),
                     ),
-
                     SizedBox(height: 20),
-
-                    // Color selector
                     Text('Select Color', style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 10),
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
                       children:
                           availableColors.map((color) {
                             return GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedColor = color;
-                                });
-                              },
+                              onTap:
+                                  () => setState(() => selectedColor = color),
                               child: CircleAvatar(
                                 backgroundColor: color,
                                 child:
@@ -318,13 +336,11 @@ class _HealthReminderState extends State<HealthReminder> {
               ),
               actions: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: () => Navigator.of(context).pop(),
                   child: Text('Cancel'),
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (titleController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -336,31 +352,29 @@ class _HealthReminderState extends State<HealthReminder> {
                       return;
                     }
 
-                    // Format time string
-                    String timeString;
-                    if (isToday) {
-                      timeString = selectedTime.format(context);
-                    } else {
-                      timeString =
-                          '${DateFormat('MMM dd').format(selectedDate)}, ${selectedTime.format(context)}';
-                    }
+                    final timeString =
+                        isToday
+                            ? selectedTime.format(context)
+                            : '${DateFormat('MMM dd').format(selectedDate)}, ${selectedTime.format(context)}';
 
-                    // Create new reminder
-                    final newReminder = ReminderItem(
-                      title: titleController.text,
-                      time: timeString,
-                      icon: selectedIcon,
-                      color: selectedColor,
-                      isToday: isToday,
-                    );
+                    final userRemindersRef = FirebaseFirestore.instance
+                        .collection('user_reminders')
+                        .doc(widget.userEmail)
+                        .collection('reminders');
 
-                    // Add to list and update UI
-                    setState(() {
-                      this.setState(() {
-                        reminders.add(newReminder);
-                      });
+                    await userRemindersRef.add({
+                      'title': titleController.text,
+                      'time': timeString,
+                      'iconCodePoint': selectedIcon.codePoint,
+                      'iconFontFamily': selectedIcon.fontFamily,
+                      'iconFontPackage': selectedIcon.fontPackage,
+                      'colorValue': selectedColor.value,
+                      'isToday': isToday,
+                      'isActive': true,
+                      'createdAt': DateTime.now(),
                     });
 
+                    setState(() {});
                     Navigator.of(context).pop();
                   },
                   child: Text('Add'),
@@ -380,7 +394,7 @@ class ReminderItem {
   final IconData icon;
   final Color color;
   final bool isToday;
-  bool isActive;
+  final bool isActive;
 
   ReminderItem({
     required this.title,
@@ -388,6 +402,6 @@ class ReminderItem {
     required this.icon,
     required this.color,
     required this.isToday,
-    this.isActive = true,
+    required this.isActive,
   });
 }

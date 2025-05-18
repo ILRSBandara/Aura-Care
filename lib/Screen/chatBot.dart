@@ -68,12 +68,7 @@ class _ChatBotState extends State<ChatBot> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          "Chatbot",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
-        ),
-      ),
+      appBar: AppBar(title: Text('Chatbot')),
       body: Stack(
         children: [
           SizedBox(

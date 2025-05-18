@@ -115,9 +115,10 @@ class _UserProfileState extends State<UserProfile> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("User Profile"),
-        backgroundColor: Colors.white,
+
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
