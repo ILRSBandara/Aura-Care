@@ -23,7 +23,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _pages = <Widget>[
-      Home(), // index 0
+      Home(email: widget.emaill), // index 0
+
       HealthReminder(userEmail: widget.emaill),
       ChatBot(),
       UserProfile(email: widget.emaill), // index 3

@@ -2,6 +2,7 @@ import 'package:aura_care/Screen/bmiTracker.dart';
 import 'package:aura_care/Screen/doctorList.dart';
 import 'package:aura_care/Screen/fitness_courses/fitnessCourses.dart';
 import 'package:aura_care/Screen/autoSlidingBanner.dart';
+import 'package:aura_care/Screen/helpFinder.dart';
 import 'package:aura_care/Screen/meal_planner/DailyCalorieCalculator.dart';
 import 'package:aura_care/Screen/workout/workout_view_2.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _MenuState extends State<Menu> {
                   Padding(
                     padding: const EdgeInsets.only(),
                     child: Text(
-                      "Hello, Kasuni Madara",
+                      "Hello, Welcome back!",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
@@ -73,7 +74,7 @@ class _MenuState extends State<Menu> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Health Tracker",
+                          "Meal Planner",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -90,12 +91,13 @@ class _MenuState extends State<Menu> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const WorkoutView2(),
+                                builder:
+                                    (context) => const DailyCalorieCalculator(),
                               ),
                             );
                           },
                           child: const Text(
-                            'Track now',
+                            'Plan now',
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                         ),
@@ -315,7 +317,10 @@ class _MenuState extends State<Menu> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const WorkoutView2(),
+                                builder:
+                                    (context) => EmergencyNumbersScreen(
+                                      email: widget.email,
+                                    ),
                               ),
                             );
                           },
@@ -354,7 +359,7 @@ class _MenuState extends State<Menu> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Meal Planner",
+                          "Health Tracker",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -367,17 +372,9 @@ class _MenuState extends State<Menu> {
                               Colors.brown,
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => const DailyCalorieCalculator(),
-                              ),
-                            );
-                          },
+                          onPressed: () {},
                           child: const Text(
-                            'Make now',
+                            'Track now',
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                         ),
@@ -392,7 +389,7 @@ class _MenuState extends State<Menu> {
                 ),
               ),
 
-              SizedBox(height: 15),
+              SizedBox(height: 25),
             ],
           ),
         ),

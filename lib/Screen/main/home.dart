@@ -1,12 +1,17 @@
 import 'package:aura_care/Screen/bmiTracker.dart';
 import 'package:aura_care/Screen/doctorList.dart';
 import 'package:aura_care/Screen/authentication/signIn.dart';
+import 'package:aura_care/Screen/fitness_courses/fitnessCourses.dart';
+import 'package:aura_care/Screen/helpFinder.dart';
 import 'package:aura_care/Screen/main/menu.dart';
+import 'package:aura_care/Screen/meal_planner/DailyCalorieCalculator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String email;
+
+  const Home({super.key, required this.email});
 
   @override
   _HomeState createState() => _HomeState();
@@ -67,25 +72,29 @@ class _HomeState extends State<Home> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
         child: ListView(
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text('abcd'),
-              accountEmail: Text('abcd.@gmail.com'),
-              currentAccountPicture: GestureDetector(
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, color: Colors.white),
-                ),
-              ),
-              decoration: BoxDecoration(color: Colors.green),
-            ),
-
             ListTile(
-              onTap: () {},
-              title: Text('Health Tracker'),
-              leading: Icon(Icons.health_and_safety),
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DailyCalorieCalculator(),
+                    ),
+                  );
+                });
+              },
+              title: Text('Meal Planner'),
+              leading: Icon(Icons.fastfood),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => FitnessCourses()),
+                  );
+                });
+              },
               title: Text('Fitness Courses'),
               leading: Icon(Icons.fitness_center),
             ),
@@ -115,14 +124,26 @@ class _HomeState extends State<Home> {
               leading: Icon(Icons.medical_services),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) =>
+                              EmergencyNumbersScreen(email: widget.email),
+                    ),
+                  );
+                });
+              },
               title: Text('Help Finder'),
               leading: Icon(Icons.call),
             ),
+
             ListTile(
               onTap: () {},
-              title: Text('Meal Planner'),
-              leading: Icon(Icons.fastfood),
+              title: Text('Health Tracker'),
+              leading: Icon(Icons.health_and_safety),
             ),
             Divider(),
             ListTile(

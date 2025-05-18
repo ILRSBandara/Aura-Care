@@ -27,7 +27,6 @@ class _BuildMealScreenState extends State<BuildMealScreen>
   late TabController _tabController;
 
   final List<Food> availableFoods = [
-
     Food(
       name: 'Fish and Chips',
       calories: 800,
@@ -336,7 +335,7 @@ class _BuildMealScreenState extends State<BuildMealScreen>
                               ),
                               Container(
                                 padding: const EdgeInsets.all(16),
-                                color: Colors.blue.shade50,
+                                color: Colors.green.shade50,
                                 child: Text(
                                   "$mealType Calories: ${getTotalCalories(mealType)} kcal",
                                   style: const TextStyle(
@@ -356,7 +355,7 @@ class _BuildMealScreenState extends State<BuildMealScreen>
           Container(
             width: 200,
             padding: const EdgeInsets.all(16),
-            color: Colors.blue.shade100,
+            color: Colors.green.shade100,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
