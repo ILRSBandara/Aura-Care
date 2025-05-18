@@ -131,7 +131,7 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                       builder:
                           (context) =>
-                              EmergencyNumbersScreen(email: widget.email),
+                              EmergencyNumbersScreen(helpEmail: widget.email),
                     ),
                   );
                 });

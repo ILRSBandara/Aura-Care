@@ -116,14 +116,7 @@ class _UserProfileState extends State<UserProfile> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text("User Profile"),
-
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      appBar: AppBar(title: const Text("User Profile")),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),

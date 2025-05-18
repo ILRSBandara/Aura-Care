@@ -154,4 +154,3 @@ class _DailyCalorieCalculatorState extends State<DailyCalorieCalculator> {
     );
   }
 }
-
