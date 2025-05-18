@@ -9,17 +9,17 @@ class StoreData {
     required String number,
     required String address,
     required String email,
-    required String weight, // 👈 Added weight parameter
+    required String weight, 
   }) async {
     try {
       if (age.isNotEmpty && nname.isNotEmpty) {
-        await _firestore.collection('UserDetails').add({
+        await _firestore.collection('user_details').add({
           'email': email,
           'age': age,
           'name': nname,
           'number': number,
           'address': address,
-          'weight': weight, // 👈 Save weight to Firestore
+          'weight': weight,
         });
         return 'success';
       } else {

@@ -183,10 +183,8 @@ class _HealthReminderState extends State<HealthReminder> {
             if (query.docs.isNotEmpty) {
               final docId = query.docs.first.id;
               if (value) {
-                // Switch turned ON — update isActive to true
                 await userRemindersRef.doc(docId).update({'isActive': true});
               } else {
-                // Switch turned OFF — delete the reminder
                 await userRemindersRef.doc(docId).delete();
               }
             }

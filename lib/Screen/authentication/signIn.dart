@@ -188,7 +188,7 @@ class _SignInState extends State<SignIn> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SignUp(),
-                  ), // Navigate to SignUp screen
+                  ),
                 );
               },
               child: const Text(

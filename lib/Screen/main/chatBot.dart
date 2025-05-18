@@ -22,7 +22,6 @@ class _ChatBotState extends State<ChatBot> {
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBTI4bEWDsI0geotzHsG_OH801ROfCMAjk";
     final uri = Uri.parse(url);
 
-    // Build the message from chat history
     List<Map<String, dynamic>> parts = [];
     for (var i = 0; i < _chatHistory.length; i++) {
       parts.add({"text": _chatHistory[i]["message"]});
@@ -163,53 +162,10 @@ class _ChatBotState extends State<ChatBot> {
                     ),
                   ),
                   SizedBox(width: 10),
-                  // MaterialButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       if (_chatController.text.isNotEmpty) {
-                  //         _chatHistory.add({
-                  //           "time": DateTime.now(),
-                  //           "message": _chatController.text,
-                  //           "isSender": true,
-                  //         });
-                  //         _chatController.clear();
-                  //       }
-                  //     });
-                  //     _scrollController.jumpTo(
-                  //       _scrollController.position.maxScrollExtent,
-                  //     );
 
-                  //     getAnswer();
-                  //   },
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(50.0),
-                  //   ),
-                  //   padding: const EdgeInsets.all(0.0),
-                  //   child: Ink(
-                  //     decoration: const BoxDecoration(
-                  //       gradient: LinearGradient(
-                  //         begin: Alignment.topLeft,
-                  //         end: Alignment.bottomRight,
-                  //         colors: [Colors.green, Colors.blue],
-                  //       ),
-                  //       borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                  //     ),
-                  //     child: Container(
-                  //       constraints: const BoxConstraints(
-                  //         minWidth: 46.0,
-                  //         minHeight: 36.0,
-                  //       ),
-                  //       alignment: Alignment.center,
-                  //       child: const Icon(
-                  //         Icons.arrow_upward,
-                  //         color: Colors.white,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Container(
-                    margin: EdgeInsets.zero, // Ensure no margin from parent
-                    padding: EdgeInsets.zero, // Ensure no padding from parent
+                    margin: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
                     child: MaterialButton(
                       onPressed: () {
                         setState(() {
@@ -230,9 +186,9 @@ class _ChatBotState extends State<ChatBot> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      padding: EdgeInsets.zero, // Remove internal padding
-                      minWidth: 0, // Optional: prevents default minimum width
-                      height: 0, // Optional: prevents default minimum height
+                      padding: EdgeInsets.zero, 
+                      minWidth: 0, 
+                      height: 0, 
                       child: Ink(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(

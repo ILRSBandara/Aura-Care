@@ -1,7 +1,6 @@
 import 'package:aura_care/Screen/meal_planner/buildMealScreen.dart';
 import 'package:flutter/material.dart';
 
-// Model class for Food
 class Food {
   final String name;
   final int calories;
@@ -28,7 +27,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Screen 1: Daily Calorie Calculator
 class DailyCalorieCalculator extends StatefulWidget {
   const DailyCalorieCalculator({super.key});
 

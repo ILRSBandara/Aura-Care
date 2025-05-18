@@ -1,10 +1,10 @@
-import 'package:aura_care/Screen/healthReminder.dart';
+import 'package:aura_care/Screen/main/healthReminder.dart';
 import 'package:aura_care/Screen/main/home.dart';
-import 'package:aura_care/Screen/userProfile.dart';
+import 'package:aura_care/Screen/main/userProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'chatBot.dart';
+import 'main/chatBot.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String emaill;
@@ -23,11 +23,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _pages = <Widget>[
-      Home(email: widget.emaill), // index 0
+      Home(email: widget.emaill),
 
       HealthReminder(userEmail: widget.emaill),
       ChatBot(),
-      UserProfile(email: widget.emaill), // index 3
+      UserProfile(email: widget.emaill),
     ];
   }
 

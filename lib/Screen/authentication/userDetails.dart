@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
 import 'package:aura_care/Screen/authentication/success.dart';
-import 'package:aura_care/Screen/authentication/utils.dart'; // Your existing image picker helper
+import 'package:aura_care/Screen/authentication/utils.dart';
 
 class UserDetails extends StatefulWidget {
   final String email;
@@ -22,9 +22,7 @@ class _UserDetailsState extends State<UserDetails> {
   final TextEditingController numberEditingController = TextEditingController();
   final TextEditingController addressEditingController =
       TextEditingController();
-  final TextEditingController weightEditingController =
-      TextEditingController(); // ✅ Added
-
+  final TextEditingController weightEditingController = TextEditingController();
   void selectImage() async {
     List<int> img = await pickImage(ImageSource.gallery);
     setState(() {
@@ -38,7 +36,7 @@ class _UserDetailsState extends State<UserDetails> {
     String nname = nnameEditingController.text;
     String number = numberEditingController.text;
     String address = addressEditingController.text;
-    String weight = weightEditingController.text; // ✅ Added
+    String weight = weightEditingController.text;
 
     if (age.isEmpty || nname.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -54,14 +52,14 @@ class _UserDetailsState extends State<UserDetails> {
         'name': nname,
         'number': number,
         'address': address,
-        'weight': weight, // ✅ Added
+        'weight': weight,
       });
 
       ageEditingController.clear();
       nnameEditingController.clear();
       numberEditingController.clear();
       addressEditingController.clear();
-      weightEditingController.clear(); // ✅ Clear after save
+      weightEditingController.clear();
 
       Navigator.push(
         context,
@@ -103,7 +101,7 @@ class _UserDetailsState extends State<UserDetails> {
                         )
                         : const CircleAvatar(
                           radius: 64,
-                          backgroundImage: AssetImage('assets/images/user.png'),
+                          backgroundImage: AssetImage('assets/Images/user.png'),
                         ),
                     Positioned(
                       bottom: -10,
@@ -123,7 +121,7 @@ class _UserDetailsState extends State<UserDetails> {
                 buildTextField(
                   weightEditingController,
                   'Enter Your Weight (kg)',
-                ), // ✅ New Field
+                ),
                 const SizedBox(height: 20),
                 buildTextField(
                   numberEditingController,

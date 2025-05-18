@@ -1,15 +1,15 @@
-import 'package:aura_care/Screen/doctorProfile.dart';
+import 'package:aura_care/Screen/doctor_gallery/doctorProfile.dart';
 import 'package:flutter/material.dart';
 
 class Doctor {
   final String name;
   final String specialty;
-  final String imageAssetPath; // Local image path
+  final String imageAssetPath;
 
   Doctor({
     required this.name,
     required this.specialty,
-    required this.imageAssetPath, // Use local image path here
+    required this.imageAssetPath,
   });
 }
 
@@ -17,12 +17,10 @@ class DoctorListScreen extends StatefulWidget {
   const DoctorListScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _DoctorListScreenState createState() => _DoctorListScreenState();
 }
 
 class _DoctorListScreenState extends State<DoctorListScreen> {
-  // Sample doctor data with local images
   final List<Doctor> doctors = [
     Doctor(
       name: "Dr. Vardh Shaneru",
@@ -64,7 +62,6 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
       specialty: "Psychiatric-Mental",
       imageAssetPath: "assets/Images/doctor01.jpg",
     ),
-    // Add other doctors...
   ];
 
   List<Doctor> filteredDoctors = [];
@@ -75,7 +72,6 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     filteredDoctors = doctors;
   }
 
-  // Function to filter doctors based on search input
   void filterDoctors(String query) {
     setState(() {
       filteredDoctors =
@@ -94,7 +90,6 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Search Bar
             TextField(
               onChanged: filterDoctors,
               decoration: InputDecoration(
@@ -106,7 +101,6 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
               ),
             ),
             SizedBox(height: 16),
-            // Doctor List
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -119,7 +113,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                   final doctor = filteredDoctors[index];
                   return GestureDetector(
                     onTap: () {
-                      // Navigate to the doctor's profile screen
+       
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -138,7 +132,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                         children: [
                           ClipOval(
                             child: Image.asset(
-                              doctor.imageAssetPath, // Load local image
+                              doctor.imageAssetPath, 
                               width: 80,
                               height: 80,
                               fit: BoxFit.cover,

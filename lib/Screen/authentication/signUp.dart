@@ -14,39 +14,33 @@ class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final rePasswordController =
-      TextEditingController(); // Re-enter password controller
+      TextEditingController(); 
 
-  // Initialize FirebaseAuth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Sign up method using Firebase Authentication
   Future<void> _signUp() async {
-    // Check if passwords match
     if (passwordController.text.trim() != rePasswordController.text.trim()) {
       _showErrorDialog("Passwords do not match!");
       return;
     }
 
     try {
-      // Create a new user with email and password
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
 
-      // If sign up is successful, navigate to the Dashboard screen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => UserDetails(email: emailController.text)),
       );
     } catch (e) {
-      // Handle errors (e.g., weak password, invalid email)
+
       _showErrorDialog(e.toString());
     }
   }
 
-  // Method to show error dialog
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -65,40 +59,6 @@ class _SignUpState extends State<SignUp> {
           ),
     );
   }
-
-  // @override
-  // Widget
-  // build(
-  //   BuildContext
-  //   context,
-  // ) {
-  //   return Scaffold(
-  //     backgroundColor:
-  //         Colors.white,
-  //     body: SingleChildScrollView(
-  //       child: Padding(
-  //         padding: const EdgeInsets.only(
-  //           left:
-  //               25,
-  //           right:
-  //               25,
-  //           top:
-  //               100,
-  //         ),
-  //         child: Column(
-  //           children: [
-  //             _header(),
-  //             _log(),
-  //             _inputFields(),
-  //             _signUpButton(),
-  //             _loginRedirect(),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -128,7 +88,6 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  // Header with logo and name
   _header() {
     return const Column(
       children: [
@@ -175,7 +134,6 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  // Input fields for email, password, and re-enter password
   _inputFields() {
     return Column(
       children: [
@@ -227,7 +185,6 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  // Sign up button
   _signUpButton() {
     return GestureDetector(
       onTap: _signUp,
@@ -251,7 +208,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  // Redirect to LogIn screen if already have an account
+
   _loginRedirect() {
     return Column(
       children: [
@@ -266,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SignIn(),
-                  ), // Navigate to LogIn screen
+                  ), 
                 );
               },
               child: const Text(

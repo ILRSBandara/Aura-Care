@@ -131,12 +131,11 @@ class _UserProfileState extends State<UserProfile> {
             children: [
               CircleAvatar(
                 radius: 75,
-                backgroundImage: const AssetImage("assets/Images/user.jpg"),
+                backgroundImage: const AssetImage("assets/Images/user.png"),
                 backgroundColor: Colors.grey[200],
               ),
               const SizedBox(height: 10),
 
-              // Editable Name with edit icon
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -218,7 +217,6 @@ class _UserProfileState extends State<UserProfile> {
                 value: userData!['email'],
               ),
 
-              // Age field editable only if editing
               ListTile(
                 leading: const Icon(Icons.calendar_today, color: Colors.green),
                 title: const Text("Age"),
@@ -238,7 +236,6 @@ class _UserProfileState extends State<UserProfile> {
                         : Text(userData!['age'] ?? ''),
               ),
 
-              // Weight field editable only if editing
               ListTile(
                 leading: const Icon(Icons.monitor_weight, color: Colors.green),
                 title: const Text("Weight"),
@@ -258,7 +255,6 @@ class _UserProfileState extends State<UserProfile> {
                         : Text(userData!['weight'] ?? ''),
               ),
 
-              // Address field editable only if editing
               ListTile(
                 leading: const Icon(Icons.location_on, color: Colors.green),
                 title: const Text("Address"),
@@ -278,7 +274,6 @@ class _UserProfileState extends State<UserProfile> {
                         : Text(userData!['address'] ?? ''),
               ),
 
-              // Show Save Changes button only when editing
               if (isEditing)
                 Padding(
                   padding: const EdgeInsets.only(top: 20),

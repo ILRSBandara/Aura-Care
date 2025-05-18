@@ -43,21 +43,19 @@ class _LodingScreenState extends State<LodingScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 300),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 75),
-                      child: Image.asset(
-                        'assets/Images/auraCareMainLogo.png',
-                        width: 100,
-                      ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 300),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 75),
+                    child: Image.asset(
+                      'assets/Images/auraCareMainLogo.png',
+                      width: 100,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

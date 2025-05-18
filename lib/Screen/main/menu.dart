@@ -1,5 +1,5 @@
 import 'package:aura_care/Screen/bmiTracker.dart';
-import 'package:aura_care/Screen/doctorList.dart';
+import 'package:aura_care/Screen/doctor_gallery/doctorList.dart';
 import 'package:aura_care/Screen/fitness_courses/fitnessCourses.dart';
 import 'package:aura_care/Screen/autoSlidingBanner.dart';
 import 'package:aura_care/Screen/helpFinder.dart';
