@@ -4,7 +4,6 @@ import 'package:aura_care/Screen/fitness_courses/fitnessCourses.dart';
 import 'package:aura_care/Screen/autoSlidingBanner.dart';
 import 'package:aura_care/Screen/helpFinder.dart';
 import 'package:aura_care/Screen/meal_planner/DailyCalorieCalculator.dart';
-import 'package:aura_care/Screen/workout/workout_view_2.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
