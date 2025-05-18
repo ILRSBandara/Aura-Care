@@ -1,6 +1,6 @@
 import 'package:aura_care/Screen/main/healthReminder.dart';
 import 'package:aura_care/Screen/main/home.dart';
-import 'package:aura_care/Screen/profile.dart';
+import 'package:aura_care/Screen/userProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -26,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       Home(), // index 0
       HealthReminder(),
       ChatBot(),
-      ProfileDisplayData(),
+      UserProfile(email: widget.emaill), // index 3
     ];
   }
 

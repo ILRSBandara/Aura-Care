@@ -1,4 +1,5 @@
 import 'package:aura_care/Screen/authentication/signIn.dart';
+import 'package:aura_care/Screen/authentication/userDetails.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class _SignUpState extends State<SignUp> {
       // If sign up is successful, navigate to the Dashboard screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const SignIn()),
+        MaterialPageRoute(builder: (context) => UserDetails(email: emailController.text)),
       );
     } catch (e) {
       // Handle errors (e.g., weak password, invalid email)
