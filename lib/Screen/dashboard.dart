@@ -1,99 +1,79 @@
-import 'package:aura_care/Screen/daily_check_In_screen.dart';
-import 'package:aura_care/Screen/gemini_ai.dart';
+import 'package:aura_care/Screen/main/healthReminder.dart';
+import 'package:aura_care/Screen/main/home.dart';
+import 'package:aura_care/Screen/main/userProfile.dart';
 import 'package:flutter/material.dart';
-import 'bmi.dart';             // your existing BMI screen
-import 'doctor_list.dart';    // import your doctor_list.dart
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+import 'main/chatBot.dart';
+
+class DashboardScreen extends StatefulWidget {
+  final String emaill;
+  const DashboardScreen({super.key, required this.emaill});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min, // center vertically
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const BMIScreen()),
-                );
-              },
-              child: const Text('Open BMI Calculator'),
-            ),
-            const SizedBox(height: 16),
-
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const HealthDataScreen()),
-                );
-              },
-              child: const Text('Health Data'),
-            ),
-            const SizedBox(height: 16),
-
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const DoctorListScreen()),
-                );
-              },
-              child: const Text('Doctor Details'),
-            ),
-            const SizedBox(height: 16),
-
-            // 🔥 New Button for DailyCheckInScreen
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const DailyCheckInScreen()),
-                );
-              },
-              child: const Text('Daily Check-in Screen'),
-            ),
-            const SizedBox(height: 16),
-
-            // 👇 New Button for AI-Chatbot
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const GeminiChatBot()),
-                );
-              },
-              child: const Text('AI-Chatbot'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
+class _DashboardScreenState extends State<DashboardScreen> {
+  int _selectedIndex = 0;
 
-// -----------------------------
-// Your Health Data Screen (Simple One)
-class HealthDataScreen extends StatelessWidget {
-  const HealthDataScreen({super.key});
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = <Widget>[
+      Home(email: widget.emaill),
+
+      HealthReminder(userEmail: widget.emaill),
+      ChatBot(),
+      UserProfile(email: widget.emaill),
+    ];
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Health Data'),
-      ),
-      body: const Center(
-        child: Text('Health Data Screen Content'),
+      backgroundColor: Colors.white,
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            label: 'Reminder',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.robot, size: 23.0),
+            label: 'Chatbot',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'Profile',
+            backgroundColor: Colors.white,
+          ),
+        ],
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.green,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedLabelStyle: TextStyle(fontSize: 12),
+        unselectedLabelStyle: TextStyle(fontSize: 12),
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593540298175",
+    "project_id": "aura-care-341e2",
+    "storage_bucket": "aura-care-341e2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593540298175:android:aaced68cde994276529d0a",
+        "android_client_info": {
+          "package_name": "com.example.aura_care"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLGIXtWfaRS4XdWOPxgPmqoqq6NIrrV8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
